@@ -43,7 +43,7 @@ namespace CGH_App.Common
                 case Size.Small: return "image/small_pig.png";
                 case Size.Medium: return "image/medium_pig.png";
                 case Size.Large: return "image/large_pig.png";
-                case Size.Giant: return "image/gaint_pig.png";
+                case Size.Giant: return "image/giant_pig.png";
                 default: throw new NotImplementedException();
             }
         }

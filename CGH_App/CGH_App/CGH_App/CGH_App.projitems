@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\CommonClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ICommonClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Singleton.cs" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        
         <Storyboard x:Key="Bouncing_Object" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image1">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
@@ -19,7 +20,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="-14"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            
+
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image2">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-14"/>
@@ -27,7 +28,6 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-14"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-
 
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image3">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
@@ -44,12 +44,15 @@
             </DoubleAnimationUsingKeyFrames>
             
         </Storyboard>
+        
     </Window.Resources>
+    
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
             <BeginStoryboard Storyboard="{StaticResource Bouncing_Object}"/>
         </EventTrigger>
-    </Window.Triggers>    
+    </Window.Triggers>  
+    
     <Canvas x:Name="GameCanvas"  Margin="0,0,0,250">
         <Image x:Name="imagebackground" Canvas.Left="0" Canvas.Top="0"   
                Source="Image/background.png" Stretch="Fill"

@@ -13,13 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CGH_App.Common;
+using System.Windows.Media.Animation;
+using System.Windows.Interactivity;
+using Microsoft.Expression.Interactivity.Media;
 
 namespace CGH_App.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ICommonClass
     {
         public MainWindow()
         {
@@ -27,16 +30,12 @@ namespace CGH_App.WPF
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            /*
+        {          
             int i = 1;
-            //foreach(var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Data_Type.Size))
-            List<CommonClass.Size>  list = CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Data_Type.Size).Cast < CommonClass.Size >;
-
-            if(true)
+            foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Data_Type.Size))
             {
                 Image image;
-                switch(i++)
+                switch(i)
                 {
                     case 1: image = image1; break;
                     case 2: image = image2; break;
@@ -49,10 +48,58 @@ namespace CGH_App.WPF
                 bi.BeginInit();
                 bi.UriSource = new Uri(CommonClass.getURL(CommonClass.Data_Type.Size, value), UriKind.Relative);
                 bi.EndInit();
-
                 image.Source = bi ;
+
+                //LoadAnimation(image, value);
+                i++;
+            }           
+        }
+        public void LoadAnimation(object obj, CommonClass.Size value)
+        {
+            Image image = obj as Image;
+            var storyboard = new Storyboard();
+            
+            storyboard.RepeatBehavior = RepeatBehavior.Forever;
+
+            var myDoubleAnimationUsingKeyFrames = new DoubleAnimationUsingKeyFrames();
+            switch (value)
+            {
+                case CommonClass.Size.Small :
+                    /*
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image1">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-14"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.45" Value="-14"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="-14"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                     */
+                    storyboard.Name = "small_story";
+                    var myEasingDoubleKeyFrame = new EasingDoubleKeyFrame();
+                    for(int i = 1; i <= 7;i++)
+                    {
+                        myEasingDoubleKeyFrame.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.15*i));
+                        myEasingDoubleKeyFrame.Value = (i % 2 == 0 ? 0 : -14);
+                        myDoubleAnimationUsingKeyFrames.KeyFrames.Add(myEasingDoubleKeyFrame);
+                    }
+                    Storyboard.SetTargetName(myDoubleAnimationUsingKeyFrames, "small_bouncing");
+                    break;
+                case CommonClass.Size.Medium: break;
+                case CommonClass.Size.Large: break;
+                case CommonClass.Size.Giant: break;
             }
-            */
+            //Storyboard.TargetProperty = "(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+            Storyboard.SetTargetProperty(myDoubleAnimationUsingKeyFrames, new PropertyPath("TransformGroup.Children[3].TranslateTransform.Y"));
+            storyboard.Children.Add(myDoubleAnimationUsingKeyFrames);
+            
+            var eventTrigger = new System.Windows.Interactivity.EventTrigger() { EventName = "FrameworkElement.Loaded" };
+
+            var controlStoryboardAction = new ControlStoryboardAction();
+            controlStoryboardAction.Storyboard = storyboard;
+            controlStoryboardAction.ControlStoryboardOption = ControlStoryboardOption.Play;
+            eventTrigger.Actions.Add(controlStoryboardAction);
         }
     }
 }

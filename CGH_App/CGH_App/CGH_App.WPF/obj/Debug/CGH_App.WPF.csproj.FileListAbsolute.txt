@@ -12,3 +12,7 @@ C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.W
 C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.WPF.exe
 C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.WPF.pdb
 C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.WPF.csprojResolveAssemblyReference.cache
+C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\bin\Debug\System.Windows.Interactivity.xml
