@@ -115,6 +115,9 @@
   <ItemGroup>
     <Resource Include="Image\giant_pig.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\flag.png" />
+  </ItemGroup>
   <Import Project="..\CGH_App\CGH_App.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

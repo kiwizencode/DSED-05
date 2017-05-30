@@ -22,7 +22,7 @@ namespace CGH_App.WPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ICommonClass
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
@@ -54,6 +54,10 @@ namespace CGH_App.WPF
                 i++;
             }           
         }
+
+        #region Future enhance features : to be coded in the future
+        // TODO : attached the animation to specific image 
+        /*
         public void LoadAnimation(object obj, CommonClass.Size value)
         {
             Image image = obj as Image;
@@ -65,17 +69,6 @@ namespace CGH_App.WPF
             switch (value)
             {
                 case CommonClass.Size.Small :
-                    /*
-                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image1">
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-14"/>
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.45" Value="-14"/>
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="-14"/>
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
-                        </DoubleAnimationUsingKeyFrames>
-                     */
                     storyboard.Name = "small_story";
                     var myEasingDoubleKeyFrame = new EasingDoubleKeyFrame();
                     for(int i = 1; i <= 7;i++)
@@ -101,5 +94,7 @@ namespace CGH_App.WPF
             controlStoryboardAction.ControlStoryboardOption = ControlStoryboardOption.Play;
             eventTrigger.Actions.Add(controlStoryboardAction);
         }
+        */
+        #endregion
     }
 }

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:CGH_App.WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Image x:Key="FlagImage" Source="image/flag.png"  />
     </Application.Resources>
 </Application>
