@@ -12,12 +12,12 @@ namespace CGH_App.WPF.Model
     public class RacerModelClass 
     {
         private RacerBaseClass _Racer;
-        public int Top;
-        public int Left;
-
+        //public int Top;
+        public double Left;
+        public int ID { get => _Racer.ID; }
         public System.Windows.Controls.Image Image { get; private set; }
-        public delegate void DisplayView(RacerModelClass racer);
-        public DisplayView CallBackMethod = null;
+        //public delegate void DisplayView(RacerModelClass racer);
+        //public DisplayView CallBackMethod = null;
 
         public RacerModelClass(CommonClass.Size size, string name, System.Windows.Controls.Image screen_image_object)
         {
@@ -32,10 +32,13 @@ namespace CGH_App.WPF.Model
         /// <summary>
         /// 
         /// </summary>
+        /// 
+        /*
         public void Move(object sender, EventArgs e)
         {
             if (CallBackMethod != null)
                 CallBackMethod(this);
         }
+        */
     }
 }

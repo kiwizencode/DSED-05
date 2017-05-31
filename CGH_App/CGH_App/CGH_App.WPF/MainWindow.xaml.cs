@@ -26,50 +26,113 @@ namespace CGH_App.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        //DispatcherTimer timer;
+        DispatcherTimer timer;
         List<RacerModelClass> RacerList = new List<RacerModelClass>();
+        //bool winflag = false;
         public MainWindow()
         {
             InitializeComponent();
-
+            InitializeTimer();
             InitializeRacerModel();
         }
+        /// <summary>
+        /// Initialize the timer control
+        /// </summary>
+        private void InitializeTimer()
+        {
+            timer = new DispatcherTimer()
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 50)
+            };
+        }
+        private void InitializeDogModelPosition()
+        {
+            //foreach (RacerModelClass model in RacerList)
+            //{
+                //Canvas.SetTop(model.Image, model.Top);
 
+                //Canvas.SetLeft(model.Image, model.Left);
+            //model.Image.SetValue(Canvas.LeftProperty, model.Left);
+            //}
+            
+            Canvas.SetLeft(image1, 10);
+            Canvas.SetLeft(image2, 0);
+            Canvas.SetLeft(image3, 0);
+            Canvas.SetLeft(image4, 0);
+            
+            //winflag = false;
+        }
         private void InitializeRacerModel()
         {
             int i = 1;
             foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Size))
             {
                 Image image;
-                int Top, Left=7;
+                //int Top, Left=7;
                 string name;
                 switch (i)
                 {
                     case 1: image = image1;
                             name = "Image1";
-                            Top = 3;
+                            //Top = 3;
                             break;
                     case 2: image = image2;
                             name = "Image2";
-                            Top = 45;
+                            //Top = 45;
                             break;
                     case 3: image = image3;
                             name = "image3";
-                            Top = 90;
+                            //Top = 90;
                             break;
                     case 4: image = image4;
                             name = "image4";
-                            Top = 130;
+                            //Top = 130;
                             break;
                     default:
                         throw new NotSupportedException();
                 }
                 RacerModelClass model = new RacerModelClass(value, name, image);
+                //{
+                //    //model.Top = Top;
+                //    Left = Canvas.GetLeft((UIElement)image)
+                //};
+                
+                //model.CallBackMethod = DisplayImage;
                 i++;
                 RacerList.Add(model);
+                //timer.Tick += new EventHandler(model.Move);
+                timer.Tick += (sender, e) => Timer_Tick_Method(sender, e, model);
             }
         }
 
+        private void Timer_Tick_Method(object sender, EventArgs e, RacerModelClass racer)
+        {
+            Image image = racer.Image;
+            long leftPosition = Convert.ToInt64(image.GetValue(Canvas.LeftProperty));
+            int pace = CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Speed, CommonClass.Speed.Level_4);
+            if (leftPosition >= ImageBackground.Width - image.Width) //800 is the width of the panel
+            {
+                timer.Stop();
+                MessageBox.Show($"Dog {racer.ID} has won!!!");
+                //CheckForWinner(id);
+                //winflag = true;
+                InitializeDogModelPosition();
+
+                //PunterList.Items.Refresh();
+            }
+            else
+            {
+                Canvas.SetLeft(image, leftPosition + pace);
+            }
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            //InitializeDogModelPosition();
+            timer.Start();
+        }
+
+        #region obsolete Method
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {          
             int i = 1;
@@ -96,6 +159,43 @@ namespace CGH_App.WPF
                 i++;
             }           
         }
+
+        private void DisplayImage(RacerModelClass racer)
+        {
+            /*
+            if(winflag)
+            { 
+                timer.Stop();
+                return;
+            }
+            */
+
+            //calculating the dog postion with respect to left property
+            Image image = racer.Image;
+            long leftPosition = Convert.ToInt64(image.GetValue(Canvas.LeftProperty));
+            int pace = CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Speed, CommonClass.Speed.Level_4);
+            if (leftPosition >= ImageBackground.Width - image.Width) //800 is the width of the panel
+            {
+                timer.Stop();
+
+                //if (!winflag)
+                //{
+                MessageBox.Show($"Dog {racer.ID} has won!!!");
+                //CheckForWinner(id);
+                //winflag = true;
+                InitializeDogModelPosition();
+                //InitializeComponent();
+                //PunterList.Items.Refresh();
+                //}
+
+            }
+            else
+            {
+
+                Canvas.SetLeft(image, leftPosition + pace);
+            }
+        }
+        #endregion
 
         #region Future enhance features : to be coded in the future
         // TODO : attached the animation to specific image 

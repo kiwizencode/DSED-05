@@ -55,11 +55,11 @@
     </Window.Triggers>
 
     <Canvas x:Name="GameCanvas"  Margin="0,0,0,250">
-        <Image x:Name="imagebackground" Canvas.Left="0" Canvas.Top="0"   
+        <Image x:Name="ImageBackground" Canvas.Left="0" Canvas.Top="0"   
                Source="Image/background.png" Stretch="Fill"
                Width="{Binding ActualWidth, ElementName=GameCanvas}"
                Height="{Binding ActualHeight, ElementName=GameCanvas}"/>
-        <Image x:Name="image1"  Canvas.Top="85" Canvas.Left="15" Height="50" Width="50" 
+        <Image x:Name="image1"  Canvas.Top="85" Canvas.Left="10" Height="50" Width="50" 
                Source="image/small_pig.png" RenderTransformOrigin="0.5,0.5" >
             <Image.RenderTransform>
                 <TransformGroup>
@@ -70,7 +70,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="image2"  Canvas.Top="135" Canvas.Left="15" Height="50" Width="50" 
+        <Image x:Name="image2"  Canvas.Top="135" Canvas.Left="10" Height="50" Width="50" 
                 Source="image/medium_pig.png" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -81,7 +81,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="image3"  Canvas.Top="190" Canvas.Left="15" Height="50" Width="50" 
+        <Image x:Name="image3"  Canvas.Top="190" Canvas.Left="10" Height="50" Width="50" 
                 Source="Image/large_pig.png" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -92,7 +92,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="image4"  Canvas.Top="250" Canvas.Left="15" Height="50" Width="50" 
+        <Image x:Name="image4"  Canvas.Top="250" Canvas.Left="10" Height="50" Width="50" 
             Source="Image/giant_pig.png" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -103,6 +103,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Button Content="{StaticResource ResourceKey=FlagImage}" Height="78" Canvas.Left="683" Canvas.Top="336" Width="79"/>
+        <Button Content="{StaticResource ResourceKey=FlagImage}" Height="78" Canvas.Left="683" Canvas.Top="336" Width="79"
+                Click="StartButton_Click"/>
     </Canvas>
 </Window>
