@@ -17,14 +17,14 @@ namespace CGH_App.Common
         public Random Seed { get { return _random; } }
         private CommonCodeSingleton(){}
 
-        public IEnumerable<dynamic> getRandomSequence(CommonClass.Data_Type type)
+        public IEnumerable<dynamic> getRandomSequence(CommonClass.Racer_Parameter_Type type)
         {
             switch (type)
             {
-                case CommonClass.Data_Type.Size:
+                case CommonClass.Racer_Parameter_Type.Size:
                     return Enum.GetValues(typeof(CommonClass.Size)).Cast<dynamic>().OrderBy(x => _random.Next()).ToArray();
                     //break;
-                case CommonClass.Data_Type.Speed:
+                case CommonClass.Racer_Parameter_Type.Speed:
                     return Enum.GetValues(typeof(CommonClass.Speed)).Cast<dynamic>().OrderBy(x => _random.Next()).ToArray();
                     //break;
                 default: throw new NotImplementedException();

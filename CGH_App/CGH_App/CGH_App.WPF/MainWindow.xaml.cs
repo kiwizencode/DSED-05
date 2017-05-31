@@ -16,6 +16,8 @@ using CGH_App.Common;
 using System.Windows.Media.Animation;
 using System.Windows.Interactivity;
 using Microsoft.Expression.Interactivity.Media;
+using System.Windows.Threading;
+using CGH_App.WPF.Model;
 
 namespace CGH_App.WPF
 {
@@ -24,15 +26,54 @@ namespace CGH_App.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        //DispatcherTimer timer;
+        List<RacerModelClass> RacerList = new List<RacerModelClass>();
         public MainWindow()
         {
             InitializeComponent();
+
+            InitializeRacerModel();
+        }
+
+        private void InitializeRacerModel()
+        {
+            int i = 1;
+            foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Size))
+            {
+                Image image;
+                int Top, Left=7;
+                string name;
+                switch (i)
+                {
+                    case 1: image = image1;
+                            name = "Image1";
+                            Top = 3;
+                            break;
+                    case 2: image = image2;
+                            name = "Image2";
+                            Top = 45;
+                            break;
+                    case 3: image = image3;
+                            name = "image3";
+                            Top = 90;
+                            break;
+                    case 4: image = image4;
+                            name = "image4";
+                            Top = 130;
+                            break;
+                    default:
+                        throw new NotSupportedException();
+                }
+                RacerModelClass model = new RacerModelClass(value, name, image);
+                i++;
+                RacerList.Add(model);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {          
             int i = 1;
-            foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Data_Type.Size))
+            foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Size))
             {
                 Image image;
                 switch(i)
@@ -44,12 +85,13 @@ namespace CGH_App.WPF
                     default:
                         throw new NotSupportedException();
                 }
+                
                 BitmapImage bi = new BitmapImage();
                 bi.BeginInit();
-                bi.UriSource = new Uri(CommonClass.getURL(CommonClass.Data_Type.Size, value), UriKind.Relative);
+                bi.UriSource = new Uri(CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Size, value), UriKind.Relative);
                 bi.EndInit();
                 image.Source = bi ;
-
+                
                 //LoadAnimation(image, value);
                 i++;
             }           

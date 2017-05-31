@@ -9,8 +9,7 @@ namespace CGH_App.Common
         /// <summary>
         /// Define the "class" of object to be return
         /// </summary>
-        public enum Data_Type { Size, Speed};
-
+        public enum Racer_Parameter_Type { Size, Speed};
         /// <summary>
         /// Define the "size" of the race object
         /// </summary>
@@ -19,24 +18,27 @@ namespace CGH_App.Common
         /// Define the "speed" of the race object
         /// </summary>
         public enum Speed { Level_1, Level_2, Level_3, Level_4 };
-
-        public static string getURL(Data_Type type, dynamic value)
+        public static dynamic GetValue(Racer_Parameter_Type type, dynamic value)
         {
             switch(type)
             {
-                case Data_Type.Size: return getSize(value);
-                case Data_Type.Speed: return getSpeed(value);
+                case Racer_Parameter_Type.Size: return GetImageURL(value);
+                case Racer_Parameter_Type.Speed: return GetSteps(value);
+                default: throw new NotImplementedException();
+            }       
+        }
+        private static int GetSteps(dynamic value)
+        {
+            switch (value)
+            {
+                case Speed.Level_1: return 1;
+                case Speed.Level_2: return 4;
+                case Speed.Level_3: return 7;
+                case Speed.Level_4: return 10;
                 default: throw new NotImplementedException();
             }
-            
         }
-
-        private static string getSpeed(dynamic value)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static string getSize(dynamic value)
+        private static string GetImageURL(dynamic value)
         {
             switch (value)
             {
@@ -44,6 +46,19 @@ namespace CGH_App.Common
                 case Size.Medium: return "image/medium_pig.png";
                 case Size.Large: return "image/large_pig.png";
                 case Size.Giant: return "image/giant_pig.png";
+                default: throw new NotImplementedException();
+            }
+        }
+
+        private static int _RacerCounter = 0;
+        private static int _PunterCounter = 0;
+        public enum ID_Class_Type { RacerClass, PunterClass };
+        public static int GetID(ID_Class_Type class_type)
+        {
+            switch(class_type)
+            {
+                case ID_Class_Type.RacerClass: return ++_RacerCounter;
+                case ID_Class_Type.PunterClass: return ++_PunterCounter;
                 default: throw new NotImplementedException();
             }
         }

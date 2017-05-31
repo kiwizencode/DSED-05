@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:CGH_App.WPF"
         mc:Ignorable="d"
         Title="DESD-05 Piggy Race" Height="600" Width="800"
-        Loaded="Window_Loaded"
+        
         WindowStartupLocation="CenterScreen">
+    <!-- Loaded="Window_Loaded" -->
     <Window.Resources>
 
         <Storyboard x:Key="Bouncing_Object" RepeatBehavior="Forever">
