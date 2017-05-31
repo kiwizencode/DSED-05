@@ -1,0 +1,9 @@
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\bin\Debug\netcoreapp1.1\RandomConsoleApp.deps.json
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\bin\Debug\netcoreapp1.1\RandomConsoleApp.runtimeconfig.json
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\bin\Debug\netcoreapp1.1\RandomConsoleApp.runtimeconfig.dev.json
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\bin\Debug\netcoreapp1.1\RandomConsoleApp.dll
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\bin\Debug\netcoreapp1.1\RandomConsoleApp.pdb
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\obj\Debug\netcoreapp1.1\RandomConsoleApp.csprojResolveAssemblyReference.cache
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\obj\Debug\netcoreapp1.1\RandomConsoleApp.AssemblyInfo.cs
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\obj\Debug\netcoreapp1.1\RandomConsoleApp.dll
+C:\Users\kiwizen\Desktop\DSED-05\CODE\RandomConsoleApp\RandomConsoleApp\obj\Debug\netcoreapp1.1\RandomConsoleApp.pdb

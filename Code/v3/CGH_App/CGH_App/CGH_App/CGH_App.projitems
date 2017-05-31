@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>2bf8f0a7-5963-4bfe-8331-73fd64cd6e60</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CGH_App</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\CommonClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ICommonClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Singleton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\IDataClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\GiantRacerClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\LargeRacerClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\MediumRacerClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\RacerBaseClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\RacerGeneratorClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\SmallRacerClass.cs" />
+  </ItemGroup>
+</Project>
