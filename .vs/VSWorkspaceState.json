@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\CGH_App"
+    "\\Code",
+    "\\Code\\v2",
+    "\\Code\\v3",
+    "\\Code\\v3\\CGH_App"
   ],
-  "SelectedNode": "\\CGH_App\\CGH_App.sln",
+  "SelectedNode": "\\Code\\v3\\CGH_App\\CGH_App.sln",
   "PreviewInSolutionExplorer": false
 }

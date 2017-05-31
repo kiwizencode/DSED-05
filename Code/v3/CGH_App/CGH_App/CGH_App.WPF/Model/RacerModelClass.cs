@@ -18,7 +18,7 @@ namespace CGH_App.WPF.Model
         public System.Windows.Controls.Image Image { get; private set; }
         //public delegate void DisplayView(RacerModelClass racer);
         //public DisplayView CallBackMethod = null;
-
+        public CommonClass.Speed Speed { get; set; }
         public RacerModelClass(CommonClass.Size size, string name, System.Windows.Controls.Image screen_image_object)
         {
             _Racer = RacerGeneratorClass.FactoryMethod(size, name);

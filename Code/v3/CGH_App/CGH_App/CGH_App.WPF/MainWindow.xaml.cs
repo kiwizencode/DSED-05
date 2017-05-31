@@ -47,20 +47,26 @@ namespace CGH_App.WPF
         }
         private void InitializeDogModelPosition()
         {
-            //foreach (RacerModelClass model in RacerList)
-            //{
+            foreach (RacerModelClass model in RacerList)
+            {
                 //Canvas.SetTop(model.Image, model.Top);
-
-                //Canvas.SetLeft(model.Image, model.Left);
-            //model.Image.SetValue(Canvas.LeftProperty, model.Left);
-            //}
-            
+                Canvas.SetLeft(model.Image, model.Left);
+                //model.Image.SetValue(Canvas.LeftProperty, model.Left);
+                //model.Left = 0;
+            }
+            /*
             Canvas.SetLeft(image1, 10);
             Canvas.SetLeft(image2, 0);
             Canvas.SetLeft(image3, 0);
             Canvas.SetLeft(image4, 0);
-            
+            */
             //winflag = false;
+            int i = 0;
+            foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Speed))
+            {
+                RacerList[i].Speed = value;
+                i++;
+            }
         }
         private void InitializeRacerModel()
         {
@@ -92,10 +98,10 @@ namespace CGH_App.WPF
                         throw new NotSupportedException();
                 }
                 RacerModelClass model = new RacerModelClass(value, name, image);
-                //{
-                //    //model.Top = Top;
-                //    Left = Canvas.GetLeft((UIElement)image)
-                //};
+                {
+                    //    //model.Top = Top;
+                    Left = 0;
+                };
                 
                 //model.CallBackMethod = DisplayImage;
                 i++;
@@ -103,21 +109,27 @@ namespace CGH_App.WPF
                 //timer.Tick += new EventHandler(model.Move);
                 timer.Tick += (sender, e) => Timer_Tick_Method(sender, e, model);
             }
+            i = 0;
+            foreach(var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Speed))
+            {
+                RacerList[i].Speed = value;
+                i++;
+            }
         }
 
         private void Timer_Tick_Method(object sender, EventArgs e, RacerModelClass racer)
         {
             Image image = racer.Image;
             long leftPosition = Convert.ToInt64(image.GetValue(Canvas.LeftProperty));
-            int pace = CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Speed, CommonClass.Speed.Level_4);
+            int pace = CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Speed, racer.Speed);
             if (leftPosition >= ImageBackground.Width - image.Width) //800 is the width of the panel
             {
                 timer.Stop();
                 MessageBox.Show($"Dog {racer.ID} has won!!!");
                 //CheckForWinner(id);
                 //winflag = true;
+                //RacerList[racer.ID - 1].Left = 10;
                 InitializeDogModelPosition();
-
                 //PunterList.Items.Refresh();
             }
             else
