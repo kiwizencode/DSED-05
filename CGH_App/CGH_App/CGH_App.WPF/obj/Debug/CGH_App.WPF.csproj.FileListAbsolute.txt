@@ -35,3 +35,4 @@ C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.W
 C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.WPF.csproj.GenerateResource.Cache
 C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.WPF.exe
 C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.WPF.pdb
+C:\Users\kiwizen\Desktop\DSED-05\CGH_App\CGH_App\CGH_App.WPF\obj\Debug\CGH_App.WPF.csprojResolveAssemblyReference.cache
