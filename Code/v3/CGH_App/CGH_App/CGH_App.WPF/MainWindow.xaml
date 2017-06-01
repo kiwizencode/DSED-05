@@ -114,8 +114,7 @@
 
 
         <Grid Height="257" Canvas.Top="319" Width="792">
-            <Button Content="{StaticResource ResourceKey=FlagImage}" Height="78" Width="79"
-                    Click="StartButton_Click" Margin="693,30,20,149"/>
+
             <Grid HorizontalAlignment="Left" Height="171" Margin="491,18,0,0" VerticalAlignment="Top" Width="119">
                 <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="126" Margin="12,6,0,0" Stroke="Black" VerticalAlignment="Top" Width="98"/>
                 <Image x:Name="SelectedRunner"  HorizontalAlignment="Left" Height="118" Margin="18,11,0,0" VerticalAlignment="Top" Width="91"/>
@@ -128,8 +127,7 @@
                 <Label x:Name="SelectedPunterName"  Content="" HorizontalAlignment="Left" Height="42" Margin="12,134,0,-5" VerticalAlignment="Top" Width="97" FontFamily="Segoe UI Semibold" FontSize="18"/>
             </Grid>
             -->
-            <Button Content="{StaticResource ResourceKey=ExitImage}" Margin="644,140,22,21"
-                    Click="ExitButton_Click"/>
+
             <ListView x:Name="PunterListView"
                 HorizontalAlignment="Left" Height="156" Margin="40,10,0,0" VerticalAlignment="Top" Width="414"
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -164,11 +162,17 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <Slider HorizontalAlignment="Left" Height="47" Margin="28,211,0,-1" VerticalAlignment="Top" Width="432" Background="Transparent"
-                     />
+            <Slider x:Name="BetSlider"
+                    HorizontalAlignment="Left" Height="47" Margin="28,211,0,-1" VerticalAlignment="Top" Width="432" Background="Transparent"
+                    IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" ValueChanged="BetSlider_ValueChanged"/>
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="486,189,0,21" Stroke="Black" Width="124"/>
             <Label x:Name="MoneyLabel"  Content="" HorizontalAlignment="Center" Margin="502,191,192,29" Width="98" FontFamily="Segoe UI Semibold" FontSize="25" />
-
+            <Button Content="{StaticResource ResourceKey=BettingImage}" HorizontalAlignment="Left" Height="75" Margin="619,33,0,0" VerticalAlignment="Top" Width="69"
+                    Click="BettingButton_Click"/>
+            <Button Content="{StaticResource ResourceKey=FlagImage}" Height="78" Width="79"
+                    Click="StartButton_Click" Margin="701,30,12,149"/>            
+            <Button Content="{StaticResource ResourceKey=ExitImage}" Margin="644,140,22,21"
+                    Click="ExitButton_Click"/>
 
             <!-- Canvas.Left="683" Canvas.Top="336" 
             -->

@@ -18,6 +18,7 @@ using System.Windows.Interactivity;
 using Microsoft.Expression.Interactivity.Media;
 using System.Windows.Threading;
 using CGH_App.WPF.Model;
+using CGH_App.Data.PunterClass;
 
 namespace CGH_App.WPF
 {
@@ -315,17 +316,68 @@ namespace CGH_App.WPF
             
             dynamic Content = (sender as ListBoxItem).Content;
             PunterModelClass model = Content.Model as PunterModelClass;
+            PunterBaseClass punter = model.Punter;
             /*
             //MessageBox.Show($"{Content.Model.Name} has been selected!!!");
             SelectedPunter.Source = model.Image.Source;
             SelectedPunterName.Content = model.Name;
              */
-            MoneyLabel.Content = model.Money;
+            if (punter.RacerID != PunterBaseClass.NO_RACER_SELECTED)
+            {
+                Image image = null;
+                string name = string.Empty;
+                switch (punter.RacerID)
+                {
+                    case 1: image = image1; name = "1"; break;
+                    case 2: image = image2; name = "2"; break;
+                    case 3: image = image3; name = "3"; break;
+                    case 4: image = image4; name = "4"; break;
+                    default: throw new NotSupportedException();
+                }
+                SelectedRunner.Source = image.Source;
+                SelectedRunnerName.Content = "Piggy " + name;
+            }
+            MoneyLabel.Content = punter.Bet;
+            BetSlider.Maximum = punter.Money;
+            BetSlider.Value = punter.Bet;
         }
        
-            private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void BettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedRunnerName.Content.ToString() == string.Empty) return;
+
+            //int runner_ID = int.Parse(SelectedRunnerName.Content.ToString().Substring(6));
+
+            if (PunterListView.SelectedIndex == -1) return;
+
+            //int index = PunterListView.SelectedIndex;
+
+            dynamic Content = PunterListView.SelectedItem;
+            PunterModelClass model = Content.Model as PunterModelClass;
+            PunterBaseClass punter = model.Punter;
+
+            punter.Bet = Convert.ToInt32(BetSlider.Value);
+            punter.RacerID = int.Parse(SelectedRunnerName.Content.ToString().Substring(6));
+
+            if(punter.Bet==0)
+            {
+                punter.RacerID = PunterBaseClass.NO_RACER_SELECTED;
+            }
+
+            SelectedRunner.Source = null;
+            SelectedRunnerName.Content = string.Empty;
+            MoneyLabel.Content = string.Empty;
+            PunterListView.SelectedIndex = -1;
+        }
+
+        private void BetSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MoneyLabel.Content = BetSlider.Value;
         }
     }
 }

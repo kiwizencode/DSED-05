@@ -12,6 +12,7 @@ namespace CGH_App.WPF.Model
     public class PunterModelClass
     {
         private PunterBaseClass _Punter;
+        public PunterBaseClass Punter { get => _Punter; }
         public string Name { get => _Punter.Name; }
         public System.Windows.Controls.Image Image { get; private set; }
         public CommonClass.Punter_Type Type { get; set; }
