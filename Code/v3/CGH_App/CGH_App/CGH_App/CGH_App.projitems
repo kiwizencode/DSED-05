@@ -13,6 +13,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ICommonClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Singleton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\IDataClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\PunterClass\MediumPunterClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\PunterClass\PoorPunterClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\PunterClass\PunterBaseClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\PunterClass\PunterGeneratorClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\PunterClass\RichPunterClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\GiantRacerClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\LargeRacerClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RacerClass\MediumRacerClass.cs" />

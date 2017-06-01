@@ -119,6 +119,16 @@
   <ItemGroup>
     <Resource Include="Image\flag.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\punter_1.png" />
+    <Resource Include="Image\punter_2.png" />
+    <Resource Include="Image\punter_3.png" />
+    <Resource Include="Image\punter_4.png" />
+    <Resource Include="Image\punter_5.png" />
+  </ItemGroup>
   <Import Project="..\CGH_App\CGH_App.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -34,7 +34,25 @@ namespace CGH_App.WPF
             InitializeComponent();
             InitializeTimer();
             InitializeRacerModel();
+            InitializePunter();
         }
+
+        private void InitializePunter()
+        {
+            foreach(var punter in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Punter))
+            {
+                Image image = new Image();
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.UriSource = new Uri(CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Punter, punter), UriKind.Relative);
+                bi.EndInit();
+                image.Source = bi;
+                //image.Stretch = Stretch.UniformToFill;
+                PunterListView.Items.Add(image);
+            }
+            
+        }
+
         /// <summary>
         /// Initialize the timer control
         /// </summary>
@@ -47,6 +65,7 @@ namespace CGH_App.WPF
         }
         private void InitializeDogModelPosition()
         {
+            
             foreach (RacerModelClass model in RacerList)
             {
                 //Canvas.SetTop(model.Image, model.Top);
@@ -54,6 +73,7 @@ namespace CGH_App.WPF
                 //model.Image.SetValue(Canvas.LeftProperty, model.Left);
                 //model.Left = 0;
             }
+            
             /*
             Canvas.SetLeft(image1, 10);
             Canvas.SetLeft(image2, 0);
@@ -67,6 +87,25 @@ namespace CGH_App.WPF
                 RacerList[i].Speed = value;
                 i++;
             }
+            i = 0;
+            foreach (var size in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Size))
+            {
+                Image image;
+                switch (++i)
+                {
+                    case 1: image = image1; break;
+                    case 2: image = image2; break;
+                    case 3: image = image3; break;
+                    case 4: image = image4; break;
+                    default: throw new NotImplementedException("Image Control not defined.");
+                }
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.UriSource = new Uri(CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Size, size), UriKind.Relative);
+                bi.EndInit();
+                image.Source = bi;
+            }
+
         }
         private void InitializeRacerModel()
         {
@@ -250,5 +289,17 @@ namespace CGH_App.WPF
         }
         */
         #endregion
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Image image = sender as Image;
+            SelectedImage.Source = image.Source;
+            SelectedLabel.Content = "Piggy " +   image.Name.Substring(5);
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

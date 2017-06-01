@@ -9,7 +9,7 @@ namespace CGH_App.Common
         /// <summary>
         /// Define the "class" of object to be return
         /// </summary>
-        public enum Racer_Parameter_Type { Size, Speed};
+        public enum Racer_Parameter_Type { Size, Speed, Punter};
         /// <summary>
         /// Define the "size" of the race object
         /// </summary>
@@ -24,6 +24,7 @@ namespace CGH_App.Common
             {
                 case Racer_Parameter_Type.Size: return GetImageURL(value);
                 case Racer_Parameter_Type.Speed: return GetSteps(value);
+                case Racer_Parameter_Type.Punter: return GetPunterImage(value);
                 default: throw new NotImplementedException();
             }       
         }
@@ -59,6 +60,18 @@ namespace CGH_App.Common
             {
                 case ID_Class_Type.RacerClass: return ++_RacerCounter;
                 case ID_Class_Type.PunterClass: return ++_PunterCounter;
+                default: throw new NotImplementedException();
+            }
+        }
+
+        public enum Punter_Type { Poor, Medium, Rich };
+        private static string GetPunterImage(dynamic value)
+        {
+            switch (value)
+            {
+                case Punter_Type.Poor: return "image/punter_5.png";
+                case Punter_Type.Medium: return "image/punter_3.png";
+                case Punter_Type.Rich: return "image/punter_4.png";
                 default: throw new NotImplementedException();
             }
         }

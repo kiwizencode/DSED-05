@@ -23,10 +23,10 @@ namespace CGH_App.Common
             {
                 case CommonClass.Racer_Parameter_Type.Size:
                     return Enum.GetValues(typeof(CommonClass.Size)).Cast<dynamic>().OrderBy(x => _random.Next()).ToArray();
-                    //break;
                 case CommonClass.Racer_Parameter_Type.Speed:
                     return Enum.GetValues(typeof(CommonClass.Speed)).Cast<dynamic>().OrderBy(x => _random.Next()).ToArray();
-                    //break;
+                case CommonClass.Racer_Parameter_Type.Punter:
+                    return Enum.GetValues(typeof(CommonClass.Punter_Type)).Cast<dynamic>().OrderBy(x => _random.Next()).ToArray();
                 default: throw new NotImplementedException();
             }
         }

@@ -60,7 +60,8 @@
                Width="{Binding ActualWidth, ElementName=GameCanvas}"
                Height="{Binding ActualHeight, ElementName=GameCanvas}"/>
         <Image x:Name="image1"  Canvas.Top="85" Canvas.Left="10" Height="50" Width="50" 
-               Source="image/small_pig.png" RenderTransformOrigin="0.5,0.5" >
+               Source="image/small_pig.png" RenderTransformOrigin="0.5,0.5"
+               MouseDown="Image_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -71,7 +72,8 @@
             </Image.RenderTransform>
         </Image>
         <Image x:Name="image2"  Canvas.Top="135" Canvas.Left="10" Height="50" Width="50" 
-                Source="image/medium_pig.png" RenderTransformOrigin="0.5,0.5">
+               Source="image/medium_pig.png" RenderTransformOrigin="0.5,0.5"
+               MouseDown="Image_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -82,7 +84,8 @@
             </Image.RenderTransform>
         </Image>
         <Image x:Name="image3"  Canvas.Top="190" Canvas.Left="10" Height="50" Width="50" 
-                Source="Image/large_pig.png" RenderTransformOrigin="0.5,0.5">
+               Source="Image/large_pig.png" RenderTransformOrigin="0.5,0.5"
+               MouseDown="Image_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -93,7 +96,8 @@
             </Image.RenderTransform>
         </Image>
         <Image x:Name="image4"  Canvas.Top="250" Canvas.Left="10" Height="50" Width="50" 
-            Source="Image/giant_pig.png" RenderTransformOrigin="0.5,0.5">
+            Source="Image/giant_pig.png" RenderTransformOrigin="0.5,0.5"
+            MouseDown="Image_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -103,7 +107,39 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Button Content="{StaticResource ResourceKey=FlagImage}" Height="78" Canvas.Left="683" Canvas.Top="336" Width="79"
-                Click="StartButton_Click"/>
+
+
+        <Grid Height="221" Canvas.Left="24.5" Canvas.Top="336" Width="755">
+            <Button Content="{StaticResource ResourceKey=FlagImage}" Height="78" Width="79"
+                    Click="StartButton_Click" Margin="666.5,12,9.5,131"/>
+            <Grid HorizontalAlignment="Left" Height="145.5" Margin="495,22.5,0,0" VerticalAlignment="Top" Width="118.5">
+                <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="125.5" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="98.5"/>
+                <Image x:Name="SelectedImage"  HorizontalAlignment="Left" Height="73.5" Margin="28.5,21,0,0" VerticalAlignment="Top" Width="64.5"/>
+                <Label x:Name="SelectedLabel"  Content="" HorizontalAlignment="Left" Height="41" Margin="22.5,94.5,0,0" VerticalAlignment="Top" Width="73.5" FontFamily="Segoe UI Semibold" FontSize="18"/>
+            </Grid>
+            <Button Content="{StaticResource ResourceKey=ExitImage}" HorizontalAlignment="Left" Margin="666.5,162,0,-0.713" VerticalAlignment="Top"
+                    Click="ExitButton_Click"/>
+            <Slider HorizontalAlignment="Left" Height="52.5" Margin="367.5,87,0,0" VerticalAlignment="Top" Width="168" RenderTransformOrigin="0.5,0.5">
+                <Slider.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Slider.RenderTransform>
+            </Slider>
+            <ListView x:Name="PunterListView"
+                HorizontalAlignment="Left" Height="197.5" Margin="19.5,13.5,0,0" VerticalAlignment="Top" Width="159"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <!-- Canvas.Left="683" Canvas.Top="336" 
+            -->
+        </Grid>
     </Canvas>
 </Window>

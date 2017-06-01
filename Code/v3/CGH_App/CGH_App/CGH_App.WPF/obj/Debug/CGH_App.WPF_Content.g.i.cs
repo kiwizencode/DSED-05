@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/flag.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_1.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_2.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_3.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_4.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_5.png")]
 
 
