@@ -225,7 +225,8 @@ namespace CGH_App.WPF
         
         private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            if (PunterListView.SelectedIndex == -1) return;
+
             dynamic Content = (sender as ListBoxItem).Content;
             PunterModelClass model = Content.Model as PunterModelClass;
             PunterBaseClass punter = model.Punter;
