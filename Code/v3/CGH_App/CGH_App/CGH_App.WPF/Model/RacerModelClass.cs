@@ -9,12 +9,13 @@ using System.Windows.Media.Imaging;
 
 namespace CGH_App.WPF.Model
 {
-    public class RacerModelClass 
+    public class RacerModelClass
     {
         private RacerBaseClass _Racer;
         //public int Top;
         public double Left;
         public int ID { get => _Racer.ID; }
+        public string Name { get => _Racer.Name;}
         public System.Windows.Controls.Image Image { get; private set; }
         //public delegate void DisplayView(RacerModelClass racer);
         //public DisplayView CallBackMethod = null;

@@ -39,18 +39,32 @@ namespace CGH_App.WPF
 
         private void InitializePunter()
         {
+            int i = 0;
             foreach(var punter in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Punter))
             {
-                Image image = new Image();
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.UriSource = new Uri(CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Punter, punter), UriKind.Relative);
-                bi.EndInit();
-                image.Source = bi;
-                //image.Stretch = Stretch.UniformToFill;
-                PunterListView.Items.Add(image);
+                string name = "";
+                switch(++i)
+                {
+                    case 1: name = "Punter 1"; break;
+                    case 2: name = "Punter 2"; break;
+                    case 3: name = "Punter 3"; break;
+                    default: throw new NotImplementedException("Punter Class not defined.");
+                }
+
+                PunterModelClass model = new PunterModelClass(punter, name);
+
+                PunterListView.Items.Add(model);
+
+                //PunterListView.MouseDown += (sender, e) => PunterListView_MouseDown(model, e);
             }
             
+        }
+
+        private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PunterModelClass model = (sender as ListBoxItem).Content as PunterModelClass;
+
+            MessageBox.Show($"{model.Name} has been selected!!!");
         }
 
         /// <summary>
@@ -118,19 +132,19 @@ namespace CGH_App.WPF
                 switch (i)
                 {
                     case 1: image = image1;
-                            name = "Image1";
+                            name = "Piggy 1";
                             //Top = 3;
                             break;
                     case 2: image = image2;
-                            name = "Image2";
+                            name = "Piggy 2";
                             //Top = 45;
                             break;
                     case 3: image = image3;
-                            name = "image3";
+                            name = "Piggy 3";
                             //Top = 90;
                             break;
                     case 4: image = image4;
-                            name = "image4";
+                            name = "Piggy 4";
                             //Top = 130;
                             break;
                     default:
@@ -146,7 +160,7 @@ namespace CGH_App.WPF
                 i++;
                 RacerList.Add(model);
                 //timer.Tick += new EventHandler(model.Move);
-                timer.Tick += (sender, e) => Timer_Tick_Method(sender, e, model);
+                timer.Tick += (sender, e) => Timer_Tick_Method(model, e);
             }
             i = 0;
             foreach(var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Speed))
@@ -156,15 +170,16 @@ namespace CGH_App.WPF
             }
         }
 
-        private void Timer_Tick_Method(object sender, EventArgs e, RacerModelClass racer)
+        private void Timer_Tick_Method(object sender, EventArgs e) 
         {
+            RacerModelClass racer = sender as RacerModelClass;
             Image image = racer.Image;
             long leftPosition = Convert.ToInt64(image.GetValue(Canvas.LeftProperty));
             int pace = CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Speed, racer.Speed);
             if (leftPosition >= ImageBackground.Width - image.Width) //800 is the width of the panel
             {
                 timer.Stop();
-                MessageBox.Show($"Dog {racer.ID} has won!!!");
+                MessageBox.Show($"{racer.Name} has won!!!");
                 //CheckForWinner(id);
                 //winflag = true;
                 //RacerList[racer.ID - 1].Left = 10;
