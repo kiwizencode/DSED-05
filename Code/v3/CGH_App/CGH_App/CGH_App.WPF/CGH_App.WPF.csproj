@@ -133,6 +133,9 @@
   <ItemGroup>
     <Resource Include="Image\betting.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\grandstand.png" />
+  </ItemGroup>
   <Import Project="..\CGH_App\CGH_App.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
