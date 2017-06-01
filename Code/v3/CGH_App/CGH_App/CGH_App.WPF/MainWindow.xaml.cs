@@ -179,7 +179,8 @@ namespace CGH_App.WPF
             {
                 timer.Stop();
                 MessageBox.Show($"{racer.Name} has won!!!");
-                //CheckForWinner(id);
+                int id = int.Parse(racer.Name.Substring(6));
+                CheckForWinner(id);
                 //winflag = true;
                 //RacerList[racer.ID - 1].Left = 10;
                 InitializeDogModelPosition();
@@ -191,76 +192,114 @@ namespace CGH_App.WPF
             }
         }
 
+        private void CheckForWinner(int winner_id)
+        {
+            foreach (dynamic item in PunterList)
+            {
+                PunterModelClass model = item.Model;
+                PunterBaseClass punter = model.Punter;
+                if (punter.RacerID != PunterBaseClass.NO_RACER_SELECTED)
+                {
+                    if (punter.RacerID == winner_id)
+                        punter.WinGame();
+                    else
+                        punter.LoseGame();
+                }
+            }
+        }
+
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             //InitializeDogModelPosition();
             timer.Start();
         }
 
-        #region obsolete Method
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {          
-            int i = 1;
-            foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Size))
-            {
-                Image image;
-                switch(i)
-                {
-                    case 1: image = image1; break;
-                    case 2: image = image2; break;
-                    case 3: image = image3; break;
-                    case 4: image = image4; break;
-                    default:
-                        throw new NotSupportedException();
-                }
-                
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.UriSource = new Uri(CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Size, value), UriKind.Relative);
-                bi.EndInit();
-                image.Source = bi ;
-                
-                //LoadAnimation(image, value);
-                i++;
-            }           
-        }
 
-        private void DisplayImage(RacerModelClass racer)
+
+        private void RunnerImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            Image image = sender as Image;
+            SelectedRunner.Source = image.Source;
+            SelectedRunnerName.Content = "Piggy " +   image.Name.Substring(5);
+        }
+        
+        private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+            dynamic Content = (sender as ListBoxItem).Content;
+            PunterModelClass model = Content.Model as PunterModelClass;
+            PunterBaseClass punter = model.Punter;
             /*
-            if(winflag)
-            { 
-                timer.Stop();
-                return;
-            }
-            */
-
-            //calculating the dog postion with respect to left property
-            Image image = racer.Image;
-            long leftPosition = Convert.ToInt64(image.GetValue(Canvas.LeftProperty));
-            int pace = CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Speed, CommonClass.Speed.Level_4);
-            if (leftPosition >= ImageBackground.Width - image.Width) //800 is the width of the panel
+            //MessageBox.Show($"{Content.Model.Name} has been selected!!!");
+            SelectedPunter.Source = model.Image.Source;
+            SelectedPunterName.Content = model.Name;
+             */
+            if (punter.RacerID != PunterBaseClass.NO_RACER_SELECTED && punter.Bet > 0)
             {
-                timer.Stop();
-
-                //if (!winflag)
-                //{
-                MessageBox.Show($"Dog {racer.ID} has won!!!");
-                //CheckForWinner(id);
-                //winflag = true;
-                InitializeDogModelPosition();
-                //InitializeComponent();
-                //PunterList.Items.Refresh();
-                //}
-
+                Image image = null;
+                string name = string.Empty;
+                switch (punter.RacerID)
+                {
+                    case 1: image = image1; name = "1"; break;
+                    case 2: image = image2; name = "2"; break;
+                    case 3: image = image3; name = "3"; break;
+                    case 4: image = image4; name = "4"; break;
+                    default: throw new NotSupportedException();
+                }
+                SelectedRunner.Source = image.Source;
+                SelectedRunnerName.Content = "Piggy " + name;
             }
             else
             {
-
-                Canvas.SetLeft(image, leftPosition + pace);
+                SelectedRunner.Source = null;
+                SelectedRunnerName.Content = string.Empty;
             }
+
+            MoneyLabel.Content = punter.Bet;
+            BetSlider.Maximum = punter.Money;
+            BetSlider.Value = punter.Bet;
         }
-        #endregion
+       
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedRunnerName.Content.ToString() != string.Empty)
+            {
+                //int runner_ID = int.Parse(SelectedRunnerName.Content.ToString().Substring(6));
+
+                if (PunterListView.SelectedIndex > -1)
+                {
+                    //int index = PunterListView.SelectedIndex;
+
+                    dynamic Content = PunterListView.SelectedItem;
+                    PunterModelClass model = Content.Model as PunterModelClass;
+                    PunterBaseClass punter = model.Punter;
+
+                    punter.Bet = Convert.ToInt32(BetSlider.Value);
+                    punter.RacerID = int.Parse(SelectedRunnerName.Content.ToString().Substring(6));
+
+                    if (punter.Bet == 0)
+                    {
+                        punter.RacerID = PunterBaseClass.NO_RACER_SELECTED;
+                    }
+                }
+            }
+            SelectedRunner.Source = null;
+            SelectedRunnerName.Content = string.Empty;
+            MoneyLabel.Content = string.Empty;
+            PunterListView.SelectedIndex = -1;
+        }
+
+        private void BetSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MoneyLabel.Content = BetSlider.Value;
+        }
+
+
 
         #region Future enhance features : to be coded in the future
         // TODO : attached the animation to specific image 
@@ -304,80 +343,69 @@ namespace CGH_App.WPF
         */
         #endregion
 
-        private void RunnerImage_MouseDown(object sender, MouseButtonEventArgs e)
+        #region obsolete Method
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Image image = sender as Image;
-            SelectedRunner.Source = image.Source;
-            SelectedRunnerName.Content = "Piggy " +   image.Name.Substring(5);
-        }
-        
-        private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            
-            dynamic Content = (sender as ListBoxItem).Content;
-            PunterModelClass model = Content.Model as PunterModelClass;
-            PunterBaseClass punter = model.Punter;
-            /*
-            //MessageBox.Show($"{Content.Model.Name} has been selected!!!");
-            SelectedPunter.Source = model.Image.Source;
-            SelectedPunterName.Content = model.Name;
-             */
-            if (punter.RacerID != PunterBaseClass.NO_RACER_SELECTED)
+            int i = 1;
+            foreach (var value in CommonCodeSingleton.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Size))
             {
-                Image image = null;
-                string name = string.Empty;
-                switch (punter.RacerID)
+                Image image;
+                switch (i)
                 {
-                    case 1: image = image1; name = "1"; break;
-                    case 2: image = image2; name = "2"; break;
-                    case 3: image = image3; name = "3"; break;
-                    case 4: image = image4; name = "4"; break;
-                    default: throw new NotSupportedException();
+                    case 1: image = image1; break;
+                    case 2: image = image2; break;
+                    case 3: image = image3; break;
+                    case 4: image = image4; break;
+                    default:
+                        throw new NotSupportedException();
                 }
-                SelectedRunner.Source = image.Source;
-                SelectedRunnerName.Content = "Piggy " + name;
+
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.UriSource = new Uri(CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Size, value), UriKind.Relative);
+                bi.EndInit();
+                image.Source = bi;
+
+                //LoadAnimation(image, value);
+                i++;
             }
-            MoneyLabel.Content = punter.Bet;
-            BetSlider.Maximum = punter.Money;
-            BetSlider.Value = punter.Bet;
-        }
-       
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
-        private void BettingButton_Click(object sender, RoutedEventArgs e)
+        private void DisplayImage(RacerModelClass racer)
         {
-            if (SelectedRunnerName.Content.ToString() == string.Empty) return;
+            /*
+            if(winflag)
+            { 
+                timer.Stop();
+                return;
+            }
+            */
 
-            //int runner_ID = int.Parse(SelectedRunnerName.Content.ToString().Substring(6));
-
-            if (PunterListView.SelectedIndex == -1) return;
-
-            //int index = PunterListView.SelectedIndex;
-
-            dynamic Content = PunterListView.SelectedItem;
-            PunterModelClass model = Content.Model as PunterModelClass;
-            PunterBaseClass punter = model.Punter;
-
-            punter.Bet = Convert.ToInt32(BetSlider.Value);
-            punter.RacerID = int.Parse(SelectedRunnerName.Content.ToString().Substring(6));
-
-            if(punter.Bet==0)
+            //calculating the dog postion with respect to left property
+            Image image = racer.Image;
+            long leftPosition = Convert.ToInt64(image.GetValue(Canvas.LeftProperty));
+            int pace = CommonClass.GetValue(CommonClass.Racer_Parameter_Type.Speed, CommonClass.Speed.Level_4);
+            if (leftPosition >= ImageBackground.Width - image.Width) //800 is the width of the panel
             {
-                punter.RacerID = PunterBaseClass.NO_RACER_SELECTED;
+                timer.Stop();
+
+                //if (!winflag)
+                //{
+                MessageBox.Show($"Dog {racer.ID} has won!!!");
+                //CheckForWinner(id);
+                //winflag = true;
+                InitializeDogModelPosition();
+                //InitializeComponent();
+                //PunterList.Items.Refresh();
+                //}
+
             }
+            else
+            {
 
-            SelectedRunner.Source = null;
-            SelectedRunnerName.Content = string.Empty;
-            MoneyLabel.Content = string.Empty;
-            PunterListView.SelectedIndex = -1;
+                Canvas.SetLeft(image, leftPosition + pace);
+            }
         }
-
-        private void BetSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            MoneyLabel.Content = BetSlider.Value;
-        }
+        #endregion
     }
 }
