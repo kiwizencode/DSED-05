@@ -8,9 +8,9 @@
         Title="DESD-05 Piggy Race" Height="600" Width="800"
         
         WindowStartupLocation="CenterScreen">
-    <!-- Loaded="Window_Loaded" -->
+    <!-- absolet method Loaded="Window_Loaded" -->
     <Window.Resources>
-
+        <!-- animate individual image such that each moving up and down at different timing-->
         <Storyboard x:Key="Bouncing_Object" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image1">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
@@ -65,7 +65,7 @@
                Height="{Binding ActualHeight, ElementName=GameCanvas}"/>
         <Image x:Name="image1"  Canvas.Top="85" Canvas.Left="10" Height="50" Width="50" 
                Source="image/small_pig.png" RenderTransformOrigin="0.5,0.5"
-               MouseDown="Image_MouseDown">
+               MouseDown="RunnerImage_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -77,7 +77,7 @@
         </Image>
         <Image x:Name="image2"  Canvas.Top="135" Canvas.Left="10" Height="50" Width="50" 
                Source="image/medium_pig.png" RenderTransformOrigin="0.5,0.5"
-               MouseDown="Image_MouseDown">
+               MouseDown="RunnerImage_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -89,7 +89,7 @@
         </Image>
         <Image x:Name="image3"  Canvas.Top="190" Canvas.Left="10" Height="50" Width="50" 
                Source="Image/large_pig.png" RenderTransformOrigin="0.5,0.5"
-               MouseDown="Image_MouseDown">
+               MouseDown="RunnerImage_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -101,7 +101,7 @@
         </Image>
         <Image x:Name="image4"  Canvas.Top="250" Canvas.Left="10" Height="50" Width="50" 
             Source="Image/giant_pig.png" RenderTransformOrigin="0.5,0.5"
-            MouseDown="Image_MouseDown">
+            MouseDown="RunnerImage_MouseDown">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -115,45 +115,61 @@
 
         <Grid Height="257" Canvas.Top="319" Width="792">
             <Button Content="{StaticResource ResourceKey=FlagImage}" Height="78" Width="79"
-                    Click="StartButton_Click" Margin="666.5,12,9.5,131"/>
-            <Grid HorizontalAlignment="Left" Height="146" Margin="323,10,0,0" VerticalAlignment="Top" Width="119">
+                    Click="StartButton_Click" Margin="693,30,20,149"/>
+            <Grid HorizontalAlignment="Left" Height="171" Margin="491,18,0,0" VerticalAlignment="Top" Width="119">
                 <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="126" Margin="12,6,0,0" Stroke="Black" VerticalAlignment="Top" Width="98"/>
-                <Image x:Name="SelectedImage"  HorizontalAlignment="Left" Height="73.5" Margin="28.5,21,0,0" VerticalAlignment="Top" Width="64.5"/>
-                <Label x:Name="SelectedLabel"  Content="" HorizontalAlignment="Left" Height="41" Margin="22.5,94.5,0,0" VerticalAlignment="Top" Width="73.5" FontFamily="Segoe UI Semibold" FontSize="18"/>
+                <Image x:Name="SelectedRunner"  HorizontalAlignment="Left" Height="118" Margin="18,11,0,0" VerticalAlignment="Top" Width="91"/>
+                <Label x:Name="SelectedRunnerName"  Content="" HorizontalAlignment="Left" Height="42" Margin="22,134,0,-5" VerticalAlignment="Top" Width="74" FontFamily="Segoe UI Semibold" FontSize="18"/>
             </Grid>
+            <!-- 
+            <Grid HorizontalAlignment="Left" Height="171" Margin="391,18,0,0" VerticalAlignment="Top" Width="119" Opacity="0">
+                <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="126" Margin="12,6,0,0" Stroke="Black" VerticalAlignment="Top" Width="98"/>
+                <Image x:Name="SelectedPunter"  HorizontalAlignment="Left" Height="119" Margin="12,10,0,0" VerticalAlignment="Top" Width="97" Stretch="Fill"/>
+                <Label x:Name="SelectedPunterName"  Content="" HorizontalAlignment="Left" Height="42" Margin="12,134,0,-5" VerticalAlignment="Top" Width="97" FontFamily="Segoe UI Semibold" FontSize="18"/>
+            </Grid>
+            -->
             <Button Content="{StaticResource ResourceKey=ExitImage}" Margin="644,140,22,21"
                     Click="ExitButton_Click"/>
-            <Slider Height="52" Margin="417,69,207,136" Width="168" RenderTransformOrigin="0.5,0.5">
-                <Slider.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Slider.RenderTransform>
-            </Slider>
             <ListView x:Name="PunterListView"
-                HorizontalAlignment="Left" Height="132" Margin="10,10,0,0" VerticalAlignment="Top" Width="308"
+                HorizontalAlignment="Left" Height="156" Margin="40,10,0,0" VerticalAlignment="Top" Width="414"
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
                       MouseDown="PunterListView_MouseDown">
                 <!--.VerticalScrollBarVisibility="Disabled"-->
+
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
+                        <!--StackPanel Orientation="Horizontal" /-->
+                        <UniformGrid Columns="3" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
+                <!-- 
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideColumnHeaderStyle}">
                         <GridViewColumn/>
                     </GridView>
                 </ListView.View>
+                -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <!--VerticalAlignment="Stretch"-->
+                            <Image Source="{Binding ImageSource}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <!--TextBlock Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Bottom" /-->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="PunterListView_MouseDown" />
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
+            <Slider HorizontalAlignment="Left" Height="47" Margin="28,211,0,-1" VerticalAlignment="Top" Width="432" Background="Transparent"
+                     />
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="486,189,0,21" Stroke="Black" Width="124"/>
+            <Label x:Name="MoneyLabel"  Content="" HorizontalAlignment="Center" Margin="502,191,192,29" Width="98" FontFamily="Segoe UI Semibold" FontSize="25" />
+
+
             <!-- Canvas.Left="683" Canvas.Top="336" 
             -->
         </Grid>

@@ -28,6 +28,7 @@ namespace CGH_App.WPF
     {
         DispatcherTimer timer;
         List<RacerModelClass> RacerList = new List<RacerModelClass>();
+        List<dynamic> PunterList = new List<dynamic>();
         //bool winflag = false;
         public MainWindow()
         {
@@ -53,19 +54,16 @@ namespace CGH_App.WPF
 
                 PunterModelClass model = new PunterModelClass(punter, name);
 
-                PunterListView.Items.Add(model);
+                PunterList.Add( new { ImageSource=model.Image.Source, Model=model });
+                //PunterListView.Items.Add(model);
 
                 //PunterListView.MouseDown += (sender, e) => PunterListView_MouseDown(model, e);
             }
+            PunterListView.ItemsSource = PunterList;
             
         }
 
-        private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            PunterModelClass model = (sender as ListBoxItem).Content as PunterModelClass;
 
-            MessageBox.Show($"{model.Name} has been selected!!!");
-        }
 
         /// <summary>
         /// Initialize the timer control
@@ -305,14 +303,27 @@ namespace CGH_App.WPF
         */
         #endregion
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void RunnerImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Image image = sender as Image;
-            SelectedImage.Source = image.Source;
-            SelectedLabel.Content = "Piggy " +   image.Name.Substring(5);
+            SelectedRunner.Source = image.Source;
+            SelectedRunnerName.Content = "Piggy " +   image.Name.Substring(5);
         }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        
+        private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+            dynamic Content = (sender as ListBoxItem).Content;
+            PunterModelClass model = Content.Model as PunterModelClass;
+            /*
+            //MessageBox.Show($"{Content.Model.Name} has been selected!!!");
+            SelectedPunter.Source = model.Image.Source;
+            SelectedPunterName.Content = model.Name;
+             */
+            MoneyLabel.Content = model.Money;
+        }
+       
+            private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
