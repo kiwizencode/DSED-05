@@ -93,7 +93,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\piggy.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\background.png" />
     <Resource Include="Image\betting.png" />
@@ -107,6 +109,9 @@
     <Resource Include="Image\racer_large.png" />
     <Resource Include="Image\racer_medium.png" />
     <Resource Include="Image\racer_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\race.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

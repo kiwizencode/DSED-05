@@ -8,17 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/background.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/betting.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/exit.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/flag.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/grandstand.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_1.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_2.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/punter_3.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/racer_giant.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/racer_large.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/racer_medium.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/racer_small.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/race.png")]
 
 
