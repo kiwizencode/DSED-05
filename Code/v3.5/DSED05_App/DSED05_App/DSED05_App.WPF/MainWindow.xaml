@@ -7,7 +7,65 @@
         mc:Ignorable="d"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="600" Width="800">
-    <!--ResizeMode="NoResize"-->
+    <Window.Resources>
+        <!-- animate individual image such that each moving up and down at different timing-->
+        <Storyboard x:Key="Bouncing_Object" RepeatBehavior="Forever">
+            
+            <!-- Animation for Racer 1-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="RacerImage1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.45" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.05" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Animation for Racer 2-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="RacerImage2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.0" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Animation for Racer 3-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="RacerImage3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.35" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.65" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.95" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.25" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <!-- Animation for Racer 4-->
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="RacerImage4">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="-8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            
+        </Storyboard>
+        <!-- Hide the ListView Column Header-->
+        <Style x:Key="HideColumnHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+        
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Bouncing_Object}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
     <Viewbox Stretch="Fill">
         <Canvas x:Name="RaceCourseCanvas" Width="300" Height="250">
             <!-- Background for Racer -->
@@ -21,9 +79,51 @@
             <Image Height="22" Canvas.Left="40" Width="50" Source="Image/piggy.png"/>
             <Image Height="35" Canvas.Left="65" Width="110" Source="Image/race.png" Canvas.Top="-1"/>
             
-            <!-- Racer Image -->
-            <Image x:Name="image_runner1" Source="image/racer_small.png"
-                   Canvas.Left="10" Canvas.Top="35" Height="15" Width="15"
+            <!-- Racer 1 Image -->
+            <Image x:Name="RacerImage1" Source="image/racer_small.png"
+                   Canvas.Left="10" Canvas.Top="45" Height="20" Width="20"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+            <!-- Racer 2 Image -->
+            <Image x:Name="RacerImage2" Source="image/racer_medium.png"
+                   Canvas.Left="10" Canvas.Top="65" Height="20" Width="20"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+            <!-- Racer 3 Image -->
+            <Image x:Name="RacerImage3" Source="image/racer_large.png"
+                   Canvas.Left="10" Canvas.Top="85" Height="20" Width="20"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+            <!-- Racer 4 Image -->
+            <Image x:Name="RacerImage4" Source="image/racer_giant.png"
+                   Canvas.Left="10" Canvas.Top="105" Height="20" Width="20"
                    RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
