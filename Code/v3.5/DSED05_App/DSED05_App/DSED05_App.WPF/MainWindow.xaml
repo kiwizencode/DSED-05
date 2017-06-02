@@ -11,11 +11,48 @@
     <Viewbox Stretch="Fill">
         <Canvas x:Name="RaceCourseCanvas" Width="300" Height="250">
             <!-- Background for Racer -->
-            <Image Canvas.Left="0" Canvas.Top="0"   
-               Source="Image/background.png" Height="132" Width="300" Stretch="Fill"/>
+            <Image Canvas.Left="0" Canvas.Top="0" Height="132" Width="300"   
+                   Source="Image/background.png" Stretch="Fill"/>
             <!-- Background for Punter -->
-            <Image Canvas.Left="0" Canvas.Top="131"   
-               Source="Image/grandstand.png" Height="120" Width="300" Stretch="Fill"/>
+            <Image Canvas.Left="0" Canvas.Top="131" Height="120" Width="300"   
+                   Source="Image/grandstand.png" Stretch="Fill"/>
+            
+            <!-- Race Game Title -->
+            <Image Height="22" Canvas.Left="40" Width="50" Source="Image/piggy.png"/>
+            <Image Height="35" Canvas.Left="65" Width="110" Source="Image/race.png" Canvas.Top="-1"/>
+            
+            <!-- Racer Image -->
+            <Image x:Name="image_runner1" Source="image/racer_small.png"
+                   Canvas.Left="10" Canvas.Top="35" Height="15" Width="15"
+                   RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <!-- -->
+            <Button Canvas.Right="5" Canvas.Top="5" Width="50" Height="30"
+                    Content="{StaticResource ResourceKey=ExitImage}" Background="{x:Null}"
+                    BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                    Click="ExitButton_Click"/>
+            <ListView Height="75" Canvas.Left="10" Canvas.Bottom="30" Width="150" Background="Transparent">
+                <ListView.Resources>
+                    <!-- Background of selected item when focussed -->
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Blue"/>
+                    <!-- Background of selected item when not focussed -->
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Blue"/>
+                </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+            
         </Canvas>
     </Viewbox>
 

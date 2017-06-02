@@ -24,5 +24,14 @@ namespace DSED05_App.WPF
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Exit Application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

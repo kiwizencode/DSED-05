@@ -26,3 +26,4 @@ C:\Users\kiwizen\Desktop\DSED-05\Code\v3.5\DSED05_App\DSED05_App\DSED05_App.WPF\
 C:\Users\kiwizen\Desktop\DSED-05\Code\v3.5\DSED05_App\DSED05_App\DSED05_App.WPF\obj\Debug\DSED05_App.WPF.csproj.GenerateResource.Cache
 C:\Users\kiwizen\Desktop\DSED-05\Code\v3.5\DSED05_App\DSED05_App\DSED05_App.WPF\obj\Debug\DSED05_App.WPF.exe
 C:\Users\kiwizen\Desktop\DSED-05\Code\v3.5\DSED05_App\DSED05_App\DSED05_App.WPF\obj\Debug\DSED05_App.WPF.pdb
+C:\Users\EliteBook8730w\Desktop\DSED-05\Code\v3.5\DSED05_App\DSED05_App\DSED05_App.WPF\obj\Debug\App.baml

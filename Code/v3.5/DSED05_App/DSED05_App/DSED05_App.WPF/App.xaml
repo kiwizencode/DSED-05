@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:DSED05_App.WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Image x:Key="FlagImage" Source="image/flag.png"/>
+        <Image x:Key="ExitImage" Source="image/exit.png"/>
+        <Image x:Key="BettingImage" Source="image/betting.png"/>
+        <Image x:Key="GrandStandImage" Source="image/grandstand.png"/>         
     </Application.Resources>
 </Application>
