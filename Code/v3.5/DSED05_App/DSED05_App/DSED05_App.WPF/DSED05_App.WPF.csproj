@@ -93,5 +93,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\background.png" />
+    <Resource Include="Image\betting.png" />
+    <Resource Include="Image\exit.png" />
+    <Resource Include="Image\flag.png" />
+    <Resource Include="Image\grandstand.png" />
+    <Resource Include="Image\punter_1.png" />
+    <Resource Include="Image\punter_2.png" />
+    <Resource Include="Image\punter_3.png" />
+    <Resource Include="Image\racer_giant.png" />
+    <Resource Include="Image\racer_large.png" />
+    <Resource Include="Image\racer_medium.png" />
+    <Resource Include="Image\racer_small.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
