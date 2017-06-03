@@ -8,17 +8,17 @@ namespace DSED05_App.Common
     /// <summary>
     /// Singleton Design Pattern
     /// </summary>
-    public sealed class CommonCodeSingleton
+    public sealed class RandomGenerator
     {
         /// <summary>
         /// using .NET 4's Lazy<T> type
         /// </summary>
-        private static readonly Lazy<CommonCodeSingleton> lazy = new Lazy<CommonCodeSingleton>(() => new CommonCodeSingleton());
-        public static CommonCodeSingleton Instance { get { return lazy.Value; } }
+        private static readonly Lazy<RandomGenerator> lazy = new Lazy<RandomGenerator>(() => new RandomGenerator());
+        public static RandomGenerator Instance { get { return lazy.Value; } }
 
         private Random _random;
         public Random Seed { get { return _random; } }
-        private CommonCodeSingleton()
+        private RandomGenerator()
         {
             _random = new Random(System.DateTime.Now.Millisecond);
         }
