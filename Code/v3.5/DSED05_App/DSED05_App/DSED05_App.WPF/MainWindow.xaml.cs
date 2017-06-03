@@ -78,7 +78,8 @@ namespace DSED05_App.WPF
                             break;
                     default: throw new NotImplementedException("Racer Image on screen Not Implemented");
                 }
-                _RacerPositionList.Add((Canvas.GetTop(image), Canvas.GetLeft(image)));
+                _RacerPositionList.Add((Convert.ToInt64(image.GetValue(Canvas.TopProperty)),
+                                        Convert.ToInt64(image.GetValue(Canvas.LeftProperty))));
 
                 RacerModel racer = new RacerModel(type,image);
                 _RacerModelList.Add(racer);
@@ -118,15 +119,16 @@ namespace DSED05_App.WPF
         private void RandomizeRacerPosition()
         {
             int i = 0;
-            foreach(CommonClass.Racer_Type type in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Racer_Type))
+            foreach(var type in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Racer_Type))
             {
                 (double Top, double Left) = _RacerPositionList[i];
                 foreach(var racer in _RacerModelList)
                 {
-                    if( racer.Type == type)
+                    if( racer.CheckIsSame(type))
                     {
                         Canvas.SetTop(racer.Image, Top);
                         Canvas.SetLeft(racer.Image, Left);
+                        
                         racer.Lane = ++i;
                         racer.Name = "Racer " + i;
                         break;

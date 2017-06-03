@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DSED05_App.Common;
 
 namespace DSED05_App.Data.Racer
 {
@@ -18,7 +19,7 @@ namespace DSED05_App.Data.Racer
 
         public bool CheckType(Enum type)
         {
-            return Type == type;
+            return (CommonClass.Racer_Type) Type == (CommonClass.Racer_Type) type;
         }
     }
 }

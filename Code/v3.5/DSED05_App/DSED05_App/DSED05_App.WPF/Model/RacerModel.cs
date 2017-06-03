@@ -24,10 +24,10 @@ namespace DSED05_App.WPF.Model
         public string Name { get => _Racer.Name; set { _Racer.Name = value; }  }
         private AbstractRacer _Racer;
 
-        public CommonClass.Racer_Type Type { get => _Type; }
+        //public CommonClass.Racer_Type Type { get => _Type; }
         public CommonClass.Speed Speed { get;  set; }
 
-        private CommonClass.Racer_Type _Type;
+        //private CommonClass.Racer_Type _Type;
 
         public int Pace
         {
@@ -35,9 +35,9 @@ namespace DSED05_App.WPF.Model
             {
                 switch (Speed)
                 {
-                    case CommonClass.Speed.Level_1: return 1;
-                    case CommonClass.Speed.Level_2: return 4;
-                    case CommonClass.Speed.Level_3: return 7;
+                    case CommonClass.Speed.Level_1: return 4;
+                    case CommonClass.Speed.Level_2: return 6;
+                    case CommonClass.Speed.Level_3: return 8;
                     case CommonClass.Speed.Level_4: return 10;
                     default: throw new NotImplementedException();
                 }
@@ -47,9 +47,13 @@ namespace DSED05_App.WPF.Model
         public RacerModel(CommonClass.Racer_Type racer_type, Image image)
         {
             _Racer = RacerGenerator.FactoryMethod(racer_type);
-            _Type = racer_type;
+            //_Type = racer_type;
             Image = image;
         }
 
+        public bool CheckIsSame(Enum type)
+        {
+            return _Racer.CheckType(type);
+        }
     }
 }

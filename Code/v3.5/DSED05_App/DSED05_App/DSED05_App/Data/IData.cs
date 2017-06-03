@@ -25,5 +25,11 @@ namespace DSED05_App.Data
         /// Type Definition for the Data Object Class
         /// </summary>
         Enum Type { get; set; }
+        /// <summary>
+        /// Check whether Type Data Object Class match the input Enum Type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        bool CheckType(Enum type)
     }
 }

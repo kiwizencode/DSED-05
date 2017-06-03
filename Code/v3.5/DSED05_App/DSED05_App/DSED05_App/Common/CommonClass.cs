@@ -21,7 +21,7 @@ namespace DSED05_App.Common
         /// <summary>
         /// Define the "type" of punter object
         /// </summary>
-        public enum Punter_Type { Poor, Medium, Rich };
+        public enum Punter_Type { Poor, Mid, Rich };
 
     }
 }
