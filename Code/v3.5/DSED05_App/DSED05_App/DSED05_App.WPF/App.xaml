@@ -1,0 +1,12 @@
+﻿<Application x:Class="DSED05_App.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DSED05_App.WPF"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Image x:Key="FlagImage" Source="image/flag.png"/>
+        <Image x:Key="ExitImage" Source="image/exit.png"/>
+        <Image x:Key="BettingImage" Source="image/betting.png"/>
+        <Image x:Key="GrandStandImage" Source="image/grandstand.png"/>         
+    </Application.Resources>
+</Application>
