@@ -9,11 +9,11 @@ namespace DSED05_App.Common
         /// <summary>
         /// Define the "Game" Parameter Type 
         /// </summary>
-        public enum Game_Parameter_Type { Size, Speed, Punter_Type };
+        public enum Game_Parameter_Type { Racer_Type, Speed, Punter_Type };
         /// <summary>
         /// Define the "size" of the race object
         /// </summary>
-        public enum Racer_Size { Small, Medium, Large, Giant };
+        public enum Racer_Type { Small, Medium, Large, Giant };
         /// <summary>
         /// Define the "speed" of the race object
         /// </summary>

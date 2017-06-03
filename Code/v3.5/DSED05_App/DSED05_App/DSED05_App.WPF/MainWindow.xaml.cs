@@ -20,7 +20,11 @@ namespace DSED05_App.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<dynamic> _RacerPositionList = new List<dynamic>();
+        //
+        // Please note: to implement the tuple, install System.ValueTuple using NuGet
+        //
+        private List<(double Top, double Left)> _RacerPositionList = new List<(double, double)>();
+
         private const int racer_count = 4;
 
         public MainWindow()
@@ -33,8 +37,20 @@ namespace DSED05_App.WPF
         /// </summary>
         private void InitializeRacerImagePosition()
         {
-            throw new NotImplementedException();
-
+            //throw new NotImplementedException();
+            for(int i = 0; i < racer_count; i++)
+            {
+                switch(i+1)
+                {
+                    case 1: _RacerPositionList.Add((Canvas.GetTop(SmallRacerImage), Canvas.GetLeft(SmallRacerImage)));
+                            
+                            break;
+                    case 2:
+                    case 3:
+                    case 4:
+                    default: throw new NotImplementedException("Racer Image on screen Not Implemented");
+                }
+            }
         }
 
         /// <summary>
