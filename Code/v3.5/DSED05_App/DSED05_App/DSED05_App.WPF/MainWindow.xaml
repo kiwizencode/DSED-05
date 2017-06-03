@@ -10,7 +10,7 @@
     <Window.Resources>
         <!-- animate individual image such that each moving up and down at different timing-->
         <Storyboard x:Key="Bouncing_Object" RepeatBehavior="Forever">
-            
+
             <!-- Animation for Small Racer Image  -->
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="SmallRacerImage">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="0"/>
@@ -56,13 +56,13 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="-8"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1.0" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            
+
         </Storyboard>
         <!-- Hide the ListView Column Header-->
         <Style x:Key="HideColumnHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
-        
+
     </Window.Resources>
 
     <Window.Triggers>
@@ -80,11 +80,11 @@
             <!-- Background for Punter -->
             <Image Canvas.Left="0" Canvas.Top="131" Height="120" Width="300"   
                    Source="Image/grandstand.png" Stretch="Fill"/>
-            
+
             <!-- Race Game Title -->
             <Image Height="22" Canvas.Left="40" Width="50" Source="Image/piggy.png"/>
             <Image Height="35" Canvas.Left="65" Width="110" Source="Image/race.png" Canvas.Top="-1"/>
-            
+
             <!-- Racer 1 : Small Racer Image -->
             <Image x:Name="SmallRacerImage" Source="image/racer_small.png"
                    Canvas.Left="10" Canvas.Top="45" Height="20" Width="20"
@@ -141,13 +141,9 @@
                 </Image.RenderTransform>
             </Image>
             <!-- -->
-            <Button Canvas.Right="5" Canvas.Top="5" Width="50" Height="30"
-                    Content="{StaticResource ResourceKey=ExitImage}" Background="{x:Null}"
-                    BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                    Click="ExitButton_Click"/>
             <ListView x:Name="PunterListView"
                       Canvas.Left="10" Canvas.Bottom="30" Width="150" Height="75" 
-                      Background="Transparent">
+                      Background="Transparent" Canvas.Top="144">
                 <ListView.Resources>
                     <!-- Background of selected item when focussed -->
                     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Blue"/>
@@ -162,16 +158,49 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            
+
                             <Image Source="{Binding ImageSource}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                            
+
                         </StackPanel>
                     </DataTemplate>
-                </ListView.ItemTemplate>                
+                </ListView.ItemTemplate>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="PunterListView_MouseDown" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                
             </ListView>
-            <Button Canvas.Left="259" Canvas.Top="144" Width="31" Height="34" 
+
+            <!-- Start the Race Button -->
+            <Button Canvas.Left="259" Canvas.Top="144" Width="30" Height="30" 
                     Content="{StaticResource ResourceKey=FlagImage}" 
                     Click="StartButton_Click" Background="{x:Null}"/>
+
+            <!-- Place the Bet Button -->
+            <Button Canvas.Left="259" Canvas.Top="193" Width="30" Height="30" 
+                    Content="{StaticResource ResourceKey=BettingImage}" 
+                    Click="BettingButton_Click" Background="{x:Null}"/>
+
+            <!-- Exit Button-->
+            <Button Canvas.Right="5" Canvas.Top="5" Width="50" Height="30"
+                    Content="{StaticResource ResourceKey=ExitImage}" Background="{x:Null}"
+                    BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                    Click="ExitButton_Click"/>
+
+            <!-- Display the racer that the punter selected -->
+            <Image x:Name="SelectedRacer" Canvas.Left="195" Canvas.Top="144" Width="50" Height="50"/>
+            <!-- Display the racer/lane No -->
+            <Label x:Name="SelectedRacerName" Canvas.Left="195" Canvas.Top="199" Width="50" Height="24"
+                   FontFamily="Segoe UI Semibold" FontSize="10"/>
+
+            <!-- -->
+            <Slider x:Name="BetSlider" Canvas.Left="10" Canvas.Bottom="4" Width="150"  Height="25"
+                    IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" ValueChanged="BetSlider_ValueChanged"/>
+            <!-- Display Amount punter put on a bet -->
+            <Label x:Name="MoneyLabel" Canvas.Left="165" Canvas.Bottom="4" Width="30"  Height="25"
+                   FontFamily="Segoe UI Semibold" FontSize="10"/>
 
 
         </Canvas>

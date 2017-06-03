@@ -10,7 +10,7 @@ namespace DSED05_App.Data.Punter
         public RichPunter()
         {
             ClassName = "Rich Punter Class";
-            Money = 25;
+            Money = 100;
             Type = CommonClass.Punter_Type.Rich;
         }
     }

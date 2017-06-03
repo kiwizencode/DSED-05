@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DSED05_App.WPF.Model;
 using DSED05_App.Common;
-using DSED05_App.Data.Racer;
 using System.Windows.Threading;
 
 namespace DSED05_App.WPF
@@ -125,15 +124,20 @@ namespace DSED05_App.WPF
                             break;
                     default: throw new NotImplementedException("Racer Image on screen Not Implemented");
                 }
+
+                //image.MouseDown += (sender, e) => RacerImage_MouseDown(image, e) ;
                 _RacerPositionList.Add((Convert.ToInt64(image.GetValue(Canvas.TopProperty)),
                                         Convert.ToInt64(image.GetValue(Canvas.LeftProperty))));
 
                 RacerModel racer = new RacerModel(type,image);
+                racer.Image.MouseDown += (sender, e) => RacerImage_MouseDown(racer, e);
+
                 _RacerModelList.Add(racer);
 
                 timer.Tick += (sender, e) => Timer_Tick_Method(racer, e);
             }
         }
+
 
         private void Timer_Tick_Method(RacerModel racer, EventArgs e)
         {
@@ -196,6 +200,13 @@ namespace DSED05_App.WPF
             }
         }
 
+        private void RacerImage_MouseDown(RacerModel model, MouseButtonEventArgs e)
+        {
+            Image image = model.Image;
+            SelectedRacer.Source = image.Source;
+            SelectedRacerName.Content = "Piggy " + model.Lane;
+        }
+
         /// <summary>
         /// Exit Application
         /// </summary>
@@ -209,6 +220,71 @@ namespace DSED05_App.WPF
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Start();
+        }
+
+        private void BettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedRacerName.Content.ToString() != string.Empty)
+            {
+                
+                if (PunterListView.SelectedIndex > -1)
+                {
+                    dynamic Content = PunterListView.SelectedItem;
+                    PunterModel model = Content.Model as PunterModel;
+                    //PunterBaseClass punter = model.Punter;
+
+                    model.Bet = Convert.ToInt32(BetSlider.Value);
+                    model.RacerID = int.Parse(SelectedRacerName.Content.ToString().Substring(6));
+
+                    if (model.Bet == 0)
+                    {
+                        model.RacerID = PunterModel.NO_RACER_SELECTED;
+                    }
+                }
+            }
+            SelectedRacer.Source = null;
+            SelectedRacerName.Content = string.Empty;
+            MoneyLabel.Content = string.Empty;
+            PunterListView.SelectedIndex = -1;
+        }
+
+        private void BetSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MoneyLabel.Content = BetSlider.Value;
+        }
+
+        private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (PunterListView.SelectedIndex == -1) return;
+
+            dynamic Content = (sender as ListBoxItem).Content;
+            PunterModel model = Content.Model as PunterModel;
+
+            if (model.RacerID != PunterModel.NO_RACER_SELECTED && model.Bet > 0)
+            {
+                RacerModel racer = GetRaceModel(model.RacerID);
+                SelectedRacer.Source = racer.Image.Source;
+                SelectedRacerName.Content = "Piggy " + racer.Lane; ;
+            }
+            else
+            {
+                SelectedRacer.Source = null;
+                SelectedRacerName.Content = string.Empty;
+            }
+
+            MoneyLabel.Content = model.Bet;
+            BetSlider.Maximum = model.Money;
+            BetSlider.Value = model.Bet;
+        }
+
+        private RacerModel GetRaceModel(int racerID)
+        {
+            for(int i = 0; i < racer_count;i++)
+            {
+                if (_RacerModelList[i].Lane == racerID)
+                    return _RacerModelList[i];
+            }
+            throw new Exception("Error !!!");
         }
     }
 }
