@@ -20,10 +20,23 @@ namespace DSED05_App.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<dynamic> _RacerPositionList = new List<dynamic>();
+        private const int racer_count = 4;
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeRacerImagePosition();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitializeRacerImagePosition()
+        {
+            throw new NotImplementedException();
+
+        }
+
         /// <summary>
         /// Exit Application
         /// </summary>
