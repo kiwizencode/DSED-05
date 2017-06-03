@@ -30,6 +30,6 @@ namespace DSED05_App.Data
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        bool CheckType(Enum type)
+        bool CheckType(Enum type);
     }
 }

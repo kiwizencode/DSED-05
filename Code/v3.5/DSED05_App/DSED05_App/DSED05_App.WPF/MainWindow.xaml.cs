@@ -30,6 +30,7 @@ namespace DSED05_App.WPF
         //
         private List<(double Top, double Left)> _RacerPositionList = new List<(double, double)>();
         private List<RacerModel> _RacerModelList = new List<RacerModel>();
+        private List<PunterModel> _PunterModelList = new List<PunterModel>();
 
         DispatcherTimer timer;
 
@@ -39,9 +40,11 @@ namespace DSED05_App.WPF
 
             InitializeTimer();
 
+            InitializePunterModel();
+
             InitializeRacerModel();
 
-            Randomize();
+            Randomize();       
         }
 
         private void InitializeTimer()
@@ -50,6 +53,30 @@ namespace DSED05_App.WPF
             {
                 Interval = new TimeSpan(0, 0, 0, 0, 50)
             };
+        }
+
+        private void InitializePunterModel()
+        {
+            int i = 0;
+            foreach (var punter in RandomGenerator.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Punter))
+            {
+                string name = "";
+                switch (++i)
+                {
+                    case 1: name = "Punter 1"; break;
+                    case 2: name = "Punter 2"; break;
+                    case 3: name = "Punter 3"; break;
+                    default: throw new NotImplementedException("Punter Class not defined.");
+                }
+
+                PunterModelClass model = new PunterModelClass(punter, name);
+
+                PunterList.Add(new { ImageSource = model.Image.Source, Model = model });
+                //PunterListView.Items.Add(model);
+
+                //PunterListView.MouseDown += (sender, e) => PunterListView_MouseDown(model, e);
+            }
+            PunterListView.ItemsSource = PunterList;
         }
 
         /// <summary>
@@ -119,7 +146,7 @@ namespace DSED05_App.WPF
         private void RandomizeRacerPosition()
         {
             int i = 0;
-            foreach(var type in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Racer_Type))
+            foreach(var type in RandomGenerator.Instance.GetRandomSequence(CommonClass.Game_Parameter_Type.Racer_Type))
             {
                 (double Top, double Left) = _RacerPositionList[i];
                 foreach(var racer in _RacerModelList)
@@ -143,7 +170,7 @@ namespace DSED05_App.WPF
         private void RandomizeRacerPace()
         {
             int i = 0;
-            foreach(CommonClass.Speed value in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Speed))
+            foreach(CommonClass.Speed value in RandomGenerator.Instance.GetRandomSequence(CommonClass.Game_Parameter_Type.Speed))
             {
                 _RacerModelList[i++].Speed = value;
             }

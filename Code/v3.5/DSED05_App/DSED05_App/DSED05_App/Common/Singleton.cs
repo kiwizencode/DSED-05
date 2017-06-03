@@ -28,7 +28,7 @@ namespace DSED05_App.Common
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public IEnumerable<Enum> getRandomSequence(CommonClass.Game_Parameter_Type type)
+        public IEnumerable<Enum> GetRandomSequence(CommonClass.Game_Parameter_Type type)
         {
             switch (type)
             {

@@ -158,6 +158,15 @@
                         <UniformGrid Columns="3"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            
+                            <Image Source="{Binding ImageSource}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>                
             </ListView>
             <Button Canvas.Left="259" Canvas.Top="144" Width="31" Height="34" 
                     Content="{StaticResource ResourceKey=FlagImage}" 
