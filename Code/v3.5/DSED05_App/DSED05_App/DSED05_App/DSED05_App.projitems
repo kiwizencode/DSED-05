@@ -11,5 +11,15 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\CommonClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Singleton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\IData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Racer\AbstractRacer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Racer\GiantRacer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Racer\LargeRacer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Racer\MediumRacer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Racer\RacerGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Racer\SmallRacer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Data\Punter\" />
   </ItemGroup>
 </Project>
