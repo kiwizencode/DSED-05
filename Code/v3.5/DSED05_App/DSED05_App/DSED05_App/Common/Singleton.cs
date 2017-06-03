@@ -33,7 +33,7 @@ namespace DSED05_App.Common
             switch (type)
             {
                 case CommonClass.Game_Parameter_Type.Size:
-                    return Enum.GetValues(typeof(CommonClass.Size)).Cast<Enum>().OrderBy(x => _random.Next()).ToArray();
+                    return Enum.GetValues(typeof(CommonClass.Racer_Size)).Cast<Enum>().OrderBy(x => _random.Next()).ToArray();
                 case CommonClass.Game_Parameter_Type.Speed:
                     return Enum.GetValues(typeof(CommonClass.Speed)).Cast<Enum>().OrderBy(x => _random.Next()).ToArray();
                 case CommonClass.Game_Parameter_Type.Punter_Type:

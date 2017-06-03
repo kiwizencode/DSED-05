@@ -13,7 +13,7 @@ namespace DSED05_App.Common
         /// <summary>
         /// Define the "size" of the race object
         /// </summary>
-        public enum Size { Small, Medium, Large, Giant };
+        public enum Racer_Size { Small, Medium, Large, Giant };
         /// <summary>
         /// Define the "speed" of the race object
         /// </summary>
