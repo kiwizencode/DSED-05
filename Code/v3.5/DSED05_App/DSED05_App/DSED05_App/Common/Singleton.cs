@@ -28,7 +28,7 @@ namespace DSED05_App.Common
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public IEnumerator<Enum> getRandomSequence(CommonClass.Game_Parameter_Type type)
+        public IEnumerable<Enum> getRandomSequence(CommonClass.Game_Parameter_Type type)
         {
             switch (type)
             {
@@ -36,7 +36,7 @@ namespace DSED05_App.Common
                     return Enum.GetValues(typeof(CommonClass.Size)).Cast<Enum>().OrderBy(x => _random.Next()).ToArray();
                 case CommonClass.Game_Parameter_Type.Speed:
                     return Enum.GetValues(typeof(CommonClass.Speed)).Cast<Enum>().OrderBy(x => _random.Next()).ToArray();
-                case CommonClass.Game_Parameter_Type.Punter:
+                case CommonClass.Game_Parameter_Type.Punter_Type:
                     return Enum.GetValues(typeof(CommonClass.Punter_Type)).Cast<Enum>().OrderBy(x => _random.Next()).ToArray();
                 default: throw new NotImplementedException();
             }

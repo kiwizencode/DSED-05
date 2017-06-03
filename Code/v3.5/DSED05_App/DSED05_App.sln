@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED05_App.WPF", "DSED05_Ap
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		DSED05_App\DSED05_App\DSED05_App.projitems*{41f9c0bb-7857-4b2d-9cf2-1988399463f3}*SharedItemsImports = 4
 		DSED05_App\DSED05_App\DSED05_App.projitems*{a1e496fe-0dd5-45fc-91f2-f8c3747aa9dc}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

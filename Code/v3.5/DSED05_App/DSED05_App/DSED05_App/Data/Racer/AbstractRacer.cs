@@ -10,5 +10,9 @@ namespace DSED05_App.Data.Racer
         {
             ClassName = "Abstract Racer Class";
         }
+
+        public int ID { get ; set ; }
+        public string Name { get ; set ; }
+        public string ClassName { get ; set ; }
     }
 }
