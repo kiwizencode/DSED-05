@@ -149,12 +149,27 @@ namespace DSED05_App.WPF
                 timer.Stop();
                 MessageBox.Show($"{racer.Name} has won!!!");
                 //int id = int.Parse(racer.Name.Substring(6));
-                //CheckForWinner(id);
+                CheckForWinner(racer.Lane);
                 Randomize();
             }
             else
             {
                 Canvas.SetLeft(image, Left + pace);
+            }
+        }
+
+        private void CheckForWinner(int winner_id)
+        {
+            foreach (dynamic item in _PunterModelList)
+            {
+                PunterModel punter = item.Model;
+                if (punter.RacerID != PunterModel.NO_RACER_SELECTED)
+                {
+                    if (punter.RacerID == winner_id)
+                        punter.WinGame();
+                    else
+                        punter.LoseGame();
+                }
             }
         }
 
@@ -231,7 +246,6 @@ namespace DSED05_App.WPF
                 {
                     dynamic Content = PunterListView.SelectedItem;
                     PunterModel model = Content.Model as PunterModel;
-                    //PunterBaseClass punter = model.Punter;
 
                     model.Bet = Convert.ToInt32(BetSlider.Value);
                     model.RacerID = int.Parse(SelectedRacerName.Content.ToString().Substring(6));
@@ -246,6 +260,7 @@ namespace DSED05_App.WPF
             SelectedRacerName.Content = string.Empty;
             MoneyLabel.Content = string.Empty;
             PunterListView.SelectedIndex = -1;
+            BetSlider.Value = 0;
         }
 
         private void BetSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -253,7 +268,7 @@ namespace DSED05_App.WPF
             MoneyLabel.Content = BetSlider.Value;
         }
 
-        private void PunterListView_MouseDown(object sender, MouseButtonEventArgs e)
+        private void PunterListView_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (PunterListView.SelectedIndex == -1) return;
 
