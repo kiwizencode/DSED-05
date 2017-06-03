@@ -30,7 +30,7 @@ namespace DSED05_App.WPF
         //
         private List<(double Top, double Left)> _RacerPositionList = new List<(double, double)>();
         private List<RacerModel> _RacerModelList = new List<RacerModel>();
-        private List<PunterModel> _PunterModelList = new List<PunterModel>();
+        private List<dynamic> _PunterModelList = new List<dynamic>();
 
         DispatcherTimer timer;
 
@@ -58,25 +58,45 @@ namespace DSED05_App.WPF
         private void InitializePunterModel()
         {
             int i = 0;
-            foreach (var punter in RandomGenerator.Instance.getRandomSequence(CommonClass.Racer_Parameter_Type.Punter))
+            foreach (CommonClass.Punter_Type punter in RandomGenerator.Instance.GetRandomSequence(CommonClass.Game_Parameter_Type.Punter_Type))
             {
                 string name = "";
+                string imageURL = "";
+                //Image image;
                 switch (++i)
                 {
-                    case 1: name = "Punter 1"; break;
-                    case 2: name = "Punter 2"; break;
-                    case 3: name = "Punter 3"; break;
-                    default: throw new NotImplementedException("Punter Class not defined.");
+                    case 1: name = "Punter 1";
+                            imageURL = "image/punter_1.png";
+                            break;
+                    case 2: name = "Punter 2";
+                            imageURL = "image/punter_2.png";
+                            break;
+                    case 3: name = "Punter 3";
+                            imageURL = "image/punter_3.png";
+                            break;
+                    default: throw new NotImplementedException("Punter Class Not Defined !!!");
                 }
 
-                PunterModelClass model = new PunterModelClass(punter, name);
+                //Image image = GetPunterImage(imageURL);
+                PunterModel model = new PunterModel(punter, GetPunterImage(imageURL));
+                model.Name = name;
 
-                PunterList.Add(new { ImageSource = model.Image.Source, Model = model });
-                //PunterListView.Items.Add(model);
-
-                //PunterListView.MouseDown += (sender, e) => PunterListView_MouseDown(model, e);
+                _PunterModelList.Add(new { ImageSource = model.Image.Source, Model = model });
             }
-            PunterListView.ItemsSource = PunterList;
+            PunterListView.ItemsSource = _PunterModelList;
+        }
+
+        private Image GetPunterImage(string imageURL)
+        {
+            Image image = new System.Windows.Controls.Image();
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.UriSource = new Uri(imageURL, UriKind.Relative);
+            bi.DecodePixelHeight = 200;
+            bi.DecodePixelWidth = 100;
+            bi.EndInit();
+            image.Source = bi;
+            return image;
         }
 
         /// <summary>
