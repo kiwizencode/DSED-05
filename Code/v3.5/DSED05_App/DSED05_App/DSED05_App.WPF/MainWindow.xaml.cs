@@ -28,7 +28,7 @@ namespace DSED05_App.WPF
         // Please note: to implement the tuple, install System.ValueTuple using NuGet
         //
         private List<(double Top, double Left)> _RacerPositionList = new List<(double, double)>();
-        private List<RacerModel> _ModelList = new List<RacerModel>();
+        private List<RacerModel> _RacerModelList = new List<RacerModel>();
 
 
         public MainWindow()
@@ -70,12 +70,37 @@ namespace DSED05_App.WPF
                 }
                 _RacerPositionList.Add((Canvas.GetTop(image), Canvas.GetLeft(image)));
                 RacerModel racer = new RacerModel(type,image);
+                _RacerModelList.Add(racer);
             }
         }
 
         private void RandomizeRacerPosition()
         {
-            foreach(var racer in )
+            int i = 0;
+            foreach(var type in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Racer_Type))
+            {
+                /*
+                switch(type)
+                {
+                    case CommonClass.Racer_Type.Small:
+                    case CommonClass.Racer_Type.Medium:
+                    case CommonClass.Racer_Type.Large:
+                    case CommonClass.Racer_Type.Giant:
+                    default: throw new NotImplementedException("Racer Type Not Defined !!!");
+                }*/
+                (double Top, double Left) = _RacerPositionList[i];
+                foreach(var racer in _RacerModelList)
+                {
+                    if( racer.Type == type)
+                    {
+                        Canvas.SetTop(racer.Image, Top);
+                        Canvas.SetLeft(racer.Image, Left);
+                        racer.Lane = ++i;
+                        racer.Name = "Racer " + i;
+                        break;
+                    }
+                }
+            }
         }
 
         /// <summary>

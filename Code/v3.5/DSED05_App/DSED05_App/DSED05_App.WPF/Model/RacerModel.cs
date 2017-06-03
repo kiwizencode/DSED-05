@@ -24,7 +24,7 @@ namespace DSED05_App.WPF.Model
         public string Name { get => _Racer.Name; set { _Racer.Name = value; }  }
         private AbstractRacer _Racer;
 
-        public CommonClass.Racer_Type Type { get => _Type; }
+        public Enum Type { get => _Type; }
         private CommonClass.Racer_Type _Type;
 
         public RacerModel(CommonClass.Racer_Type racer_type, Image image)
