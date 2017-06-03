@@ -21,5 +21,9 @@ namespace DSED05_App.Data
         /// Class Name of the Data Object Class
         /// </summary>
         string ClassName { get; set; }
+        /// <summary>
+        /// Type Definition for the Data Object Class
+        /// </summary>
+        Enum Type { get; set; }
     }
 }

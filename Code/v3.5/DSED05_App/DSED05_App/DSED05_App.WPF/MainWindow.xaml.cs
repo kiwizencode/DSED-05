@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using DSED05_App.WPF.Model;
 using DSED05_App.Common;
 using DSED05_App.Data.Racer;
+using System.Windows.Threading;
 
 namespace DSED05_App.WPF
 {
@@ -30,28 +31,37 @@ namespace DSED05_App.WPF
         private List<(double Top, double Left)> _RacerPositionList = new List<(double, double)>();
         private List<RacerModel> _RacerModelList = new List<RacerModel>();
 
+        DispatcherTimer timer;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            InitializeTimer();
+
             InitializeRacerModel();
 
-            RandomizeRacerPosition();
+            Randomize();
         }
 
-
+        private void InitializeTimer()
+        {
+            timer = new DispatcherTimer()
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 50)
+            };
+        }
 
         /// <summary>
-        /// 
+        /// 1. Store the origin starting position for all racer
+        /// 2. Also create the racer model
         /// </summary>
         private void InitializeRacerModel()
         {
-            //throw new NotImplementedException();
-            for(int i = 0; i < racer_count; i++)
+            Image image;
+            CommonClass.Racer_Type type;
+            for (int i = 0; i < racer_count; i++)
             {
-                Image image;
-                CommonClass.Racer_Type type;
                 switch(i+1)
                 {
                     case 1: image = SmallRacerImage;
@@ -69,25 +79,47 @@ namespace DSED05_App.WPF
                     default: throw new NotImplementedException("Racer Image on screen Not Implemented");
                 }
                 _RacerPositionList.Add((Canvas.GetTop(image), Canvas.GetLeft(image)));
+
                 RacerModel racer = new RacerModel(type,image);
                 _RacerModelList.Add(racer);
+
+                timer.Tick += (sender, e) => Timer_Tick_Method(racer, e);
             }
         }
 
+        private void Timer_Tick_Method(RacerModel racer, EventArgs e)
+        {
+            Image image = racer.Image;
+            long Left = Convert.ToInt64(image.GetValue(Canvas.LeftProperty));
+            int pace = racer.Pace;
+            if (Left >= ImageBackground.Width - image.Width) 
+            {
+                timer.Stop();
+                MessageBox.Show($"{racer.Name} has won!!!");
+                //int id = int.Parse(racer.Name.Substring(6));
+                //CheckForWinner(id);
+                Randomize();
+            }
+            else
+            {
+                Canvas.SetLeft(image, Left + pace);
+            }
+        }
+
+        private void Randomize()
+        {
+            RandomizeRacerPosition();
+            RandomizeRacerPace();
+        }
+
+        /// <summary>
+        /// Randomize the lane where the racer start for each race
+        /// </summary>
         private void RandomizeRacerPosition()
         {
             int i = 0;
-            foreach(var type in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Racer_Type))
+            foreach(CommonClass.Racer_Type type in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Racer_Type))
             {
-                /*
-                switch(type)
-                {
-                    case CommonClass.Racer_Type.Small:
-                    case CommonClass.Racer_Type.Medium:
-                    case CommonClass.Racer_Type.Large:
-                    case CommonClass.Racer_Type.Giant:
-                    default: throw new NotImplementedException("Racer Type Not Defined !!!");
-                }*/
                 (double Top, double Left) = _RacerPositionList[i];
                 foreach(var racer in _RacerModelList)
                 {
@@ -104,6 +136,18 @@ namespace DSED05_App.WPF
         }
 
         /// <summary>
+        /// Randomize the steps that racer take each time (for each race)
+        /// </summary>
+        private void RandomizeRacerPace()
+        {
+            int i = 0;
+            foreach(CommonClass.Speed value in RandomGenerator.Instance.getRandomSequence(CommonClass.Game_Parameter_Type.Speed))
+            {
+                _RacerModelList[i++].Speed = value;
+            }
+        }
+
+        /// <summary>
         /// Exit Application
         /// </summary>
         /// <param name="sender"></param>
@@ -111,6 +155,11 @@ namespace DSED05_App.WPF
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
         }
     }
 }

@@ -74,7 +74,8 @@
     <Viewbox Stretch="Fill">
         <Canvas x:Name="RaceCourseCanvas" Width="300" Height="250">
             <!-- Background for Racer -->
-            <Image Canvas.Left="0" Canvas.Top="0" Height="132" Width="300"   
+            <Image x:Name="ImageBackground"
+                   Canvas.Left="0" Canvas.Top="0" Height="132" Width="300"   
                    Source="Image/background.png" Stretch="Fill"/>
             <!-- Background for Punter -->
             <Image Canvas.Left="0" Canvas.Top="131" Height="120" Width="300"   
@@ -144,7 +145,8 @@
                     Content="{StaticResource ResourceKey=ExitImage}" Background="{x:Null}"
                     BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                     Click="ExitButton_Click"/>
-            <ListView Height="75" Canvas.Left="10" Canvas.Bottom="30" Width="150" Background="Transparent">
+            <ListView Canvas.Left="10" Canvas.Bottom="30" Width="150" Height="75" 
+                      Background="Transparent">
                 <ListView.Resources>
                     <!-- Background of selected item when focussed -->
                     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Blue"/>
@@ -157,7 +159,11 @@
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>
-            
+            <Button Canvas.Left="259" Canvas.Top="144" Width="31" Height="34" 
+                    Content="{StaticResource ResourceKey=FlagImage}" 
+                    Click="StartButton_Click" Background="{x:Null}"/>
+
+
         </Canvas>
     </Viewbox>
 

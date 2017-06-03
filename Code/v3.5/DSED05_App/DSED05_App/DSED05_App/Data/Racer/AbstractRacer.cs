@@ -14,5 +14,11 @@ namespace DSED05_App.Data.Racer
         public int ID { get ; set ; }
         public string Name { get ; set ; }
         public string ClassName { get ; set ; }
+        public Enum Type { get; set; }
+
+        public bool CheckType(Enum type)
+        {
+            return Type == type;
+        }
     }
 }

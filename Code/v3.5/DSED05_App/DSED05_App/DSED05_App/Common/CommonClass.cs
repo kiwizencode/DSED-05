@@ -23,16 +23,5 @@ namespace DSED05_App.Common
         /// </summary>
         public enum Punter_Type { Poor, Medium, Rich };
 
-        private static int GetSteps(dynamic value)
-        {
-            switch (value)
-            {
-                case Speed.Level_1: return 1;
-                case Speed.Level_2: return 4;
-                case Speed.Level_3: return 7;
-                case Speed.Level_4: return 10;
-                default: throw new NotImplementedException();
-            }
-        }
     }
 }
