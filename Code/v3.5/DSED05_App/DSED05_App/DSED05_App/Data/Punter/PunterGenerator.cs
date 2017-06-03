@@ -7,9 +7,9 @@ namespace DSED05_App.Data.Punter
 {
     public static class PunterGenerator
     {
-        public static AbstractPunter FactoryMethod(CommonClass.Punter_Type size)
+        public static AbstractPunter FactoryMethod(CommonClass.Punter_Type type)
         {
-            switch (size)
+            switch (type)
             {
                 case CommonClass.Punter_Type.Poor: return new PoorPunter();
                 case CommonClass.Punter_Type.Mid: return new MidPunter();

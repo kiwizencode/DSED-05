@@ -10,9 +10,9 @@ namespace DSED05_App.Data.Racer
     /// </summary>
     public static class RacerGenerator
     {
-        public static AbstractRacer FactoryMethod(CommonClass.Racer_Type size)
+        public static AbstractRacer FactoryMethod(CommonClass.Racer_Type type)
         {
-            switch(size)
+            switch(type)
             {
                 case CommonClass.Racer_Type.Small: return new SmallRacer();
                 case CommonClass.Racer_Type.Medium: return new MediumRacer();
