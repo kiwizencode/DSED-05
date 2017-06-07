@@ -13,5 +13,10 @@ namespace DSED05_App.Data.Punter
             Money = 100;
             Type = CommonClass.Punter_Type.Rich;
         }
+
+        public override void Reset()
+        {
+            Money = 100;
+        }
     }
 }

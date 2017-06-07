@@ -119,6 +119,12 @@
   <ItemGroup>
     <Resource Include="Image\race.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\wallet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\reset.png" />
+  </ItemGroup>
   <Import Project="..\DSED05_App\DSED05_App.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

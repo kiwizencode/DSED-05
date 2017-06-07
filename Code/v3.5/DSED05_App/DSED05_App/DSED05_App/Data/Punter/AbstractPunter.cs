@@ -25,5 +25,8 @@ namespace DSED05_App.Data.Punter
         {
             return (CommonClass.Punter_Type)Type == (CommonClass.Punter_Type)type;
         }
+
+        public abstract void Reset();
+
     }
 }

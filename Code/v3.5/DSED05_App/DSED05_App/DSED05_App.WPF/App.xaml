@@ -8,5 +8,6 @@
         <Image x:Key="ExitImage" Source="image/exit.png"/>
         <Image x:Key="BettingImage" Source="image/betting.png"/>
         <Image x:Key="GrandStandImage" Source="image/grandstand.png"/>
+        <Image x:Key="ResetImage" Source="image/reset.png"/>
     </Application.Resources>
 </Application>

@@ -65,5 +65,10 @@ namespace DSED05_App.WPF.Model
         {
             Bet = NOT_BETTING;
         }
+
+        public void Reset()
+        {
+            _Punter.Reset();
+        }
     }
 }

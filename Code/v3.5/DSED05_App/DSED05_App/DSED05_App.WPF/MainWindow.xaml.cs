@@ -235,13 +235,15 @@ namespace DSED05_App.WPF
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Start();
+            // Clear field
+            ResetField();
         }
 
         private void BettingButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedRacerName.Content.ToString() != string.Empty)
             {
-                
+
                 if (PunterListView.SelectedIndex > -1)
                 {
                     dynamic Content = PunterListView.SelectedItem;
@@ -256,6 +258,11 @@ namespace DSED05_App.WPF
                     }
                 }
             }
+            ResetField();
+        }
+
+        private void ResetField()
+        {
             SelectedRacer.Source = null;
             SelectedRacerName.Content = string.Empty;
             MoneyLabel.Content = string.Empty;
@@ -275,7 +282,7 @@ namespace DSED05_App.WPF
             dynamic Content = (sender as ListBoxItem).Content;
             PunterModel model = Content.Model as PunterModel;
 
-            if (model.RacerID != PunterModel.NO_RACER_SELECTED && model.Bet > 0)
+            if (model.RacerID != PunterModel.NO_RACER_SELECTED)
             {
                 RacerModel racer = GetRaceModel(model.RacerID);
                 SelectedRacer.Source = racer.Image.Source;
@@ -287,9 +294,17 @@ namespace DSED05_App.WPF
                 SelectedRacerName.Content = string.Empty;
             }
 
-            MoneyLabel.Content = model.Bet;
             BetSlider.Maximum = model.Money;
-            BetSlider.Value = model.Bet;
+            if (model.Bet > 0)
+            {
+                MoneyLabel.Content = model.Bet;
+                BetSlider.Value = model.Bet;
+            }
+            else
+            {
+                BetSlider.Value = model.Money;
+                MoneyLabel.Content = model.Money;
+            }         
         }
 
         private RacerModel GetRaceModel(int racerID)
@@ -300,6 +315,15 @@ namespace DSED05_App.WPF
                     return _RacerModelList[i];
             }
             throw new Exception("Error !!!");
+        }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < _PunterModelList.Count; i++)
+            {
+                dynamic punter = _PunterModelList[i] ;
+                punter.Model.Reset();
+            }
         }
     }
 }
